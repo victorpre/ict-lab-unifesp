@@ -1,0 +1,1 @@
+Projeto para o controle e agendamento de equipamentos para os laboratórios do ICT UNIFESP - São José dos Campos desenvolvido pelos alunos Renan Augusto Miranda e Victor Presumido.
