@@ -1,0 +1,7 @@
+<p>Bem vindo</p> 
+  <%if user_signed_in?%>
+  
+  <% else %>
+    <%= render "devise/sessions/new" %>
+  <%end  %>
+  <%= render "devise/shared/links" %>

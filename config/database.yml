@@ -17,6 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
@@ -24,6 +25,10 @@ default: &default
 development:
   <<: *default
   database: lab-ict-unifesp_development
+  adapter: postgresql
+  encoding: unicode
+  username: admin
+  password: 123mudar
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
