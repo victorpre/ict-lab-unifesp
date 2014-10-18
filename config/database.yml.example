@@ -27,8 +27,8 @@ development:
   database: lab-ict-unifesp_development
   adapter: postgresql
   encoding: unicode
-  username: admin
-  password: 123mudar
+  username: USERNAME
+  password: PASSWORD
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
