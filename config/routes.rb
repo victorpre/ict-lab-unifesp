@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :skip => [:sessions, :registrations]
+  as :user do
+    # devise/sessions
+    get 'login' => 'devise/sessions#new', :as => :new_user_session
+    post 'login' => 'devise/sessions#create', :as => :user_session
+    delete 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session
+
+    #devise/registrations
+    get 'signup' => 'devise/registrations#new', :as => :new_user_registration
+    post 'signup' => 'devise/registrations#create', :as => :user_registration
+
+    get 'edit_profile' => 'devise/registrations#edit', :as => :edit_user_registration
+    put 'edit_profile' => 'devise/registrations#update'
+
+    get 'cancel' => 'devise/registrations#cancel', :as => :cancel_user_registration
+    delete 'cancel' => 'devise/registrations#destroy'
+  end
   root to: "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
