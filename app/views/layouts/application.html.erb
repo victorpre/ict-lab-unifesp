@@ -107,6 +107,7 @@
 
           <div id="content" class="col-xs-12 col-sm-10">
             <div class="row">
+               <%= render partial: "shared/flash_messages", flash: flash %> 
               <%= yield %>
             </div>
           </div>
@@ -115,7 +116,6 @@
       </div>
 
     <% else %>
-    <%= flash[:notice] %>
       <%= yield %>
     <% end %>
 
