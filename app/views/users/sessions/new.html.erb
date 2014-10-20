@@ -6,7 +6,7 @@
       </div>
       <div class="modal-body">
         <%= form_for(resource, :as => resource_name, :class=> "form col-md-12 center-block", :url => session_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
+        <%= render "shared/flash_messages", :target =>resource %>
           <%= f.email_field :email, :autofocus => true, :class=>'form-control input-lg', :placeholder=>"E-mail" %>
           <br>
           <%= f.password_field :password, :class=>'form-control input-lg', :placeholder=>"Senha" %>
