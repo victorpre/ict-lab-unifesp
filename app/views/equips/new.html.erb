@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Adicionar novo equipamento</h2>
+
+  <%= form_for :equip do |f| %>
+    <%= devise_error_messages! %>
+
+    <div><%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true %></div>
+
+    <div><%= f.label :model %><br />
+    <%= f.text_field :model, autofocus: true %></div>
+
+    <div><%= f.label :patrimony_id %><br />
+    <%= f.text_field :patrimony_id, autofocus: true %></div>
+
+
+    <div><%= f.label :cost %><br />
+    <%= f.text_field :cost, autofocus: true %></div>
+
+    <div><%= f.submit "Adicionar equipamento" %></div>
+  <% end %>
+</div>

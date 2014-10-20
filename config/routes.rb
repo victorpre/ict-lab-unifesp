@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     delete 'cancel' => 'devise/registrations#destroy'
   end
   root to: "home#index"
+  get 'new_equip' => 'equips#new', :as => :new_equip_registration
+  post 'new_equip' => 'equips#create', :as => :equip_registration
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
