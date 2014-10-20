@@ -1,31 +1,55 @@
-<h1>Listing equips</h1>
+<div id="breadcrumb" class="col-xs-12">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Equipamentos', equips_path %></li>
+  </ol>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Model</th>
-      <th>Patrimony</th>
-      <th>Cost</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @equips.each do |equip| %>
-      <tr>
-        <td><%= equip.name %></td>
-        <td><%= equip.model %></td>
-        <td><%= equip.patrimony_id %></td>
-        <td><%= equip.cost %></td>
-        <td><%= link_to 'Show', equip %></td>
-        <td><%= link_to 'Edit', edit_equip_path(equip) %></td>
-        <td><%= link_to 'Destroy', equip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <div class="col-sm-12">
 
-<br>
+      <div style="text-align:center" class="container row">
+        <%= link_to new_equip_registration_path, :class=>"btn btn-primary"  do %>
+          <i class="fa fa-plus"></i> Novo
+        <% end %>
+      </div>
 
-<%= link_to 'New Equip', new_equip_registration_path %>
+      <div class="container row">
+        <label>Mostrar:</label>
+        <select>
+          <option>5</option>
+          <option>10</option>
+          <option>20</option>
+          <option>Todos</option>
+        </select>
+        <label>Registros</label>
+      </div>
+
+      <table class="table table-striped table-bordered table-hover table-heading no-border-bottom">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Modelo</th>
+            <th>Patrimony</th>
+            <th>Cost</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @equips.each do |equip| %>
+            <tr>
+              <td><%= equip.name %></td>
+              <td><%= equip.model %></td>
+              <td><%= equip.patrimony_id %></td>
+              <td><%= equip.cost %></td>
+              <td class="centralizar"><%= link_to edit_equip_path(equip)  do %><i class="fa fa-pencil"></i><% end %></td>
+              <td class="centralizar"><%= link_to equip, method: :delete, data: { confirm: 'Tem certeza?' } do%><i class="fa fa-trash-o"></i><%end%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>    
+
+  </div>
+</div>
