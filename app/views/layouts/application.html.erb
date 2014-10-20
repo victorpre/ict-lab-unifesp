@@ -35,7 +35,6 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
-    <%= javascript_include_tag :defaults %>
     <%= javascript_include_tag "application" %>
   </head>
   <body>
@@ -92,7 +91,7 @@
                 </a>
               </li>
               <li>
-                <a href="templates/equipamentos.html" class="ajax-link">
+                <a href="/equips" class="ajax-link">
                   <i class="fa fa-flask"></i>
                   <span class="hidden-xs">Equipamentos</span>
                 </a>
@@ -122,6 +121,7 @@
       </div>
 
     <% else %>
+    <%= flash[:notice] %>
       <%= yield %>
     <% end %>
 

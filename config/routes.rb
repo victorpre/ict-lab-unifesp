@@ -1,24 +1,28 @@
 Rails.application.routes.draw do
-  devise_for :users, :skip => [:sessions, :registrations]
+  resources :equips
+  devise_for :users, :skip => [:sessions, :registrations], controllers: { sessions: "users/sessions", registrations: "users/registrations" }
   as :user do
     # devise/sessions
-    get 'login' => 'devise/sessions#new', :as => :new_user_session
-    post 'login' => 'devise/sessions#create', :as => :user_session
-    delete 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session
+    get 'login' => 'users/sessions#new', :as => :new_user_session
+    post 'login' => 'users/sessions#create', :as => :user_session
+    delete 'logout' => 'users/sessions#destroy', :as => :destroy_user_session
 
     #devise/registrations
-    get 'signup' => 'devise/registrations#new', :as => :new_user_registration
-    post 'signup' => 'devise/registrations#create', :as => :user_registration
+    get 'signup' => 'users/registrations#new', :as => :new_user_registration
+    post 'signup' => 'users/registrations#create', :as => :user_registration
 
-    get 'edit_profile' => 'devise/registrations#edit', :as => :edit_user_registration
-    put 'edit_profile' => 'devise/registrations#update'
+    get 'edit_profile' => 'users/registrations#edit', :as => :edit_user_registration
+    put 'edit_profile' => 'users/registrations#update'
 
-    get 'cancel' => 'devise/registrations#cancel', :as => :cancel_user_registration
-    delete 'cancel' => 'devise/registrations#destroy'
+    get 'cancel' => 'users/registrations#cancel', :as => :cancel_user_registration
+    delete 'cancel' => 'users/registrations#destroy'
   end
   root to: "home#index"
   get 'new_equip' => 'equips#new', :as => :new_equip_registration
   post 'new_equip' => 'equips#create', :as => :equip_registration
+
+  get 'edit_equit' => 'equips/registrations#edit', :as => :edit_equip_registration
+  put 'edit_equip' => 'equips/registrations#update'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
