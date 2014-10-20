@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "LabIctUnifesp" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Lab ICT" %></title>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -37,61 +39,91 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
+    <% if user_signed_in? %>
 
-<% if user_signed_in? %>
-
-<a name="groups"></a>
-
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-
-      <div class="navbar-header">
-            <%=link_to "Lab ICT UNIFESP", root_path, class:"navbar-brand"%>
-
-
-         </div>
-
-       <div class="navbar-collapse collapse">
-         <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li> 
-        </ul>
-
-
-
-          <ul class="nav navbar-nav navbar-right" >
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <%= current_user.email %> <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
-                <li class="divider"></li>
-                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-              </ul>
-            </li>
-          </ul>
-
-
-        </div><!--/.navbar-collapse -->
-
-    </div>
-      <div class="container">
-
-
-
-        <% if notice %>
-        <p class="alert alert-success"><%= notice  %></p>
-        <% end %>
-        <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
-        <% end %>
-
-        <%= yield %>
+      <a name="groups"></a>
+      <header class="navbar">
+        <div class="container-fluid expanded-panel">
+          <div class="row">
+            <div id="logo" class="col-xs-12 col-sm-2">
+              <a>LAB ICT</a>
+            </div>
+            <div id="top-panel" class="col-xs-12 col-sm-10">
+              <div class="row">
+                <div class="col-xs-8 col-sm-4">
+                  <a href="#" class="show-sidebar">
+                    <i class="fa fa-bars"></i>
+                  </a>
+                </div>
+                <div class="col-xs-4 col-sm-8 top-panel-right">
+                  <ul class="nav navbar-nav pull-right panel-menu">
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <%= current_user.email %> <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <i class="fa fa-user"></i>
+                            <span><%= link_to 'Profile', edit_user_registration_path %></span>
+                        </li>
+                        <li>
+                            <i class="fa fa-power-off"></i>
+                            <span><%= link_to "Logout", destroy_user_session_path, method: :delete %></span>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
 
 
-        
-    </div>
+      <div id="main" class="container-fluid">
+        <div class="row">
+          <div id="sidebar-left" class="col-xs-2 col-sm-2">
+            <ul class="nav main-menu">
+              <li>
+                <a href="#" class="ajax-link">
+                  <i class="fa fa-calendar"></i>
+                  <span class="hidden-xs">Agendamento</span>
+                </a>
+              </li>
+              <li>
+                <a href="templates/equipamentos.html" class="ajax-link">
+                  <i class="fa fa-flask"></i>
+                  <span class="hidden-xs">Equipamentos</span>
+                </a>
+              </li>
+              <li>
+                <a href="templates/usuarios.html" class="ajax-link">
+                  <i class="fa fa-user"></i>
+                  <span class="hidden-xs">Usuários</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div id="content" class="col-xs-12 col-sm-10" style="background-color:white">
+            <div class="row">
+              <% if notice %>
+                <p class="alert alert-success"><%= notice  %></p>
+              <% end %>
+              <% if alert %>
+                <p class="alert alert-danger"><%= alert %></p>
+              <% end %>
+              <%= yield %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     <% else %>
-    <%= yield %>
-  <% end %>
+      <%= yield %>
+    <% end %>
+
   </body>
 </html>
