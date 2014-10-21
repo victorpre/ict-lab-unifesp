@@ -57,4 +57,36 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  protected
+
+  def after_update_path_for(resource)
+    case resource
+    when :user, User
+      root_path
+    else
+      super
+    end
+  end
+
+  def after_update_path_for(resource)
+    root_path
+  end
+
+  def after_put_path_for(resource)
+    root_path
+  end
+
+  def after_patch_path_for(resource)
+    case resource
+    when :user, User
+      root_path
+    else
+      super
+    end
+  end
+ 
+  def account_update_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password)
+  end
 end

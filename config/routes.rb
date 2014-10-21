@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :equips
-  devise_for :users, :skip => [:sessions, :registrations], controllers: { sessions: "users/sessions", registrations: "users/registrations" }
+  devise_for :users, :skip => [:sessions, :registrations], :controllers => { :registrations => "users/registrations", :sessions => "users/sessions" }
   as :user do
     # devise/sessions
     get 'login' => 'users/sessions#new', :as => :new_user_session
@@ -9,15 +9,16 @@ Rails.application.routes.draw do
 
     #devise/registrations
     get 'signup' => 'users/registrations#new', :as => :new_user_registration
-    post 'signup' => 'users/registrations#create', :as => :user_registration
+    post 'signup' => 'users/registrations#create'
 
     get 'edit_profile' => 'users/registrations#edit', :as => :edit_user_registration
-    put 'edit_profile' => 'users/registrations#update'
+    put 'update_profile/:id' => 'users/registrations#update', :as => :update_user_registration
 
     get 'cancel' => 'users/registrations#cancel', :as => :cancel_user_registration
     delete 'cancel' => 'users/registrations#destroy'
   end
   root to: "home#index"
+
   get 'new_equip' => 'equips#new', :as => :new_equip_registration
   post 'new_equip' => 'equips#create', :as => :equip_registration
 
