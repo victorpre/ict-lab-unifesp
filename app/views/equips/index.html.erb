@@ -1,3 +1,5 @@
+<%= javascript_include_tag "equips" %>
+
 <div id="breadcrumb" class="col-xs-12">
   <ol class="breadcrumb">
     <li><%= link_to 'Home', root_path %></li>
@@ -5,8 +7,7 @@
   </ol>
 </div>
 
-
-<div class="row">
+<div class="row" ng-controller="EquipsCtrl">
   <div class="col-sm-12">
 
       <div style="text-align:center" class="container row">
@@ -17,11 +18,10 @@
 
       <div class="container row">
         <label>Mostrar:</label>
-        <select>
-          <option>5</option>
-          <option>10</option>
-          <option>20</option>
-          <option>Todos</option>
+        <select ng-model="numeroRegistros">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value={{equipamentos.length}}>Todos</option>
         </select>
         <label>Registros</label>
       </div>
@@ -31,25 +31,29 @@
           <tr>
             <th>Nome</th>
             <th>Modelo</th>
-            <th>Patrimony</th>
-            <th>Cost</th>
+            <th>Patrimônio</th>
+            <th>Valor hora</th>
             <th colspan="2"></th>
           </tr>
         </thead>
-
         <tbody>
-          <% @equips.each do |equip| %>
-            <tr>
-              <td><%= equip.name %></td>
-              <td><%= equip.model %></td>
-              <td><%= equip.patrimony_id %></td>
-              <td><%= equip.cost %></td>
-              <td class="centralizar"><%= link_to edit_equip_path(equip)  do %><i class="fa fa-pencil"></i><% end %></td>
-              <td class="centralizar"><%= link_to equip, method: :delete, data: { confirm: 'Tem certeza?' } do%><i class="fa fa-trash-o"></i><%end%></td>
-            </tr>
-          <% end %>
+          <tr ng-repeat="equip in equipamentos | startFrom:paginaAtual*numeroRegistros | limitTo:numeroRegistros">
+            <td>{{ equip.name }}</td>
+            <td>{{ equip.model }}</td>
+            <td>{{ equip.patrimony_id }}</td>
+            <td>{{ equip.cost }}</td>
+            <td class="centralizar"><a href="/equips/{{equip.id}}/edit"><i class="fa fa-pencil"></i></a></td>
+            <td class="centralizar"><a href="#" ng-click="deletar($index)"><i class="fa fa-trash-o"></i></a></td>
+          </tr>
         </tbody>
-      </table>    
+      </table>
+
+      <div style="text-align:rigth">
+        <button ng-disabled="paginaAtual == 0" ng-click="paginaAtual=paginaAtual-1"><<</button>
+        {{paginaAtual+1}}/{{numeroPaginas()}}
+        <button ng-disabled="paginaAtual >= equipamentos.length/numeroRegistros - 1" ng-click="paginaAtual=paginaAtual+1">>></button>
+      </div>
 
   </div>
 </div>
+

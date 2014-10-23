@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get 'new_equip' => 'equips#new', :as => :new_equip_registration
   post 'new_equip' => 'equips#create', :as => :equip_registration
 
-  get 'edit_equit' => 'equips/registrations#edit', :as => :edit_equip_registration
+  get 'edit_equip' => 'equips/registrations#edit', :as => :edit_equip_registration
   put 'edit_equip' => 'equips/registrations#update'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

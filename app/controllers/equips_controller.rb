@@ -31,6 +31,7 @@ class EquipsController < ApplicationController
   end
 
   def destroy
+    @equip = Equip.find(params[:id])
     @equip.destroy
     respond_with(@equip)
   end
