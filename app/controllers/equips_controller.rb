@@ -1,6 +1,6 @@
 class EquipsController < ApplicationController
   before_action :set_equip, only: [:show, :edit, :update, :destroy]
-   respond_to :html, :xml, :json
+  respond_to :html, :xml, :json
 
   def index
     @equips = Equip.all
@@ -22,7 +22,7 @@ class EquipsController < ApplicationController
   def create
     @equip = Equip.new(equip_params)
     @equip.save
-    respond_with(@equip)
+    redirect_to :action => 'index'
   end
 
   def update
@@ -31,9 +31,8 @@ class EquipsController < ApplicationController
   end
 
   def destroy
-    @equip = Equip.find(params[:id])
     @equip.destroy
-    respond_with(@equip)
+    render status: 200, json: @controller.to_json
   end
 
   private

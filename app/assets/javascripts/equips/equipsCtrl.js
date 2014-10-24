@@ -14,12 +14,16 @@ function EquipsCtrl ($scope, EquipsService) {
 	$scope.deletar = function (idx) {
 		var equipamento = $scope.equipamentos[idx];
 
-		EquipsService.deletar(equipamento.id).success(function(){
-			$scope.equipamentos.splice(idx, 1);
-		}).error(function (erros) {
-			//Configurar mensagem de erro ao usuário
-			alert("deu erro nessa budega");
-		});
+		if ( window.confirm("Tem certeza que deseja excluir? ") ) {
+            EquipsService.deletar(equipamento.id).success(function(){
+				$scope.equipamentos.splice(idx, 1);
+			}).error(function (erros) {
+				//Configurar mensagem de erro ao usuário
+				alert("deu erro nessa budega");
+			});
+        }
+
+			
 	}
 
 	$scope.listar = function () {
