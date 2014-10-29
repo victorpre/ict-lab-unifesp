@@ -1,33 +1,47 @@
 <%= form_for(@equip) do |f| %>
-  <% if @equip.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@equip.errors.count, "error") %> prohibited this equip from being saved:</h2>
+<div class="alert alert-error bg-danger" ng-show="form_equipament.name.$dirty && form_equipament.name.$invalid">
+  <div ng-show="form_equipament.name.$error.required"> Preencha o campo nome</div>
+</div>
 
-      <ul>
-      <% @equip.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="alert alert-error bg-danger" ng-show="form_equipament.model.$dirty && form_equipament.model.$invalid">
+  <div ng-show="form_equipament.model.$error.required"> Preencha o campo modelo</div>
+</div>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+<div class="alert alert-error bg-danger" ng-show="form_equipament.patrimony.$dirty && form_equipament.patrimony.$invalid">
+  <div ng-show="form_equipament.patrimony.$error.required"> Preencha o campo patrimônio</div>
+</div>
+
+<div class="alert alert-error bg-danger" ng-show="form_equipament.cost.$dirty && form_equipament.cost.$invalid">
+  <div ng-show="form_equipament.cost.$error.required"> Preencha o campo valor hora</div>
+</div>
+
+<div class="form-group">
+  <label class="col-sm-3 control-label">Nome:</label>
+  <div class="col-sm-9">
+    <input type="text" ng-model="equipament.name" name="name" value="10"<%= @equip.name %> required class="form-control" /> 
   </div>
-  <div class="field">
-    <%= f.label :model %><br>
-    <%= f.text_field :model %>
+</div>
+<div class="form-group">
+  <label class="col-sm-3 control-label">Modelo:</label>
+  <div class="col-sm-9">
+    <input type="text" ng-model="equipament.model" name="model" required class="form-control" />
   </div>
-  <div class="field">
-    <%= f.label :patrimony_id %><br>
-    <%= f.text_field :patrimony_id %>
+</div>
+<div class="form-group">
+  <label class="col-sm-3 control-label">Patrimônio:</label>
+  <div class="col-sm-9">
+     <input type="text" ng-model="equipament.patrimony" name="patrimony" required class="form-control" />
   </div>
-  <div class="field">
-    <%= f.label :cost %><br>
-    <%= f.text_field :cost %>
+</div>
+<div class="form-group">
+  <label class="col-sm-3 control-label">Valor Hora:</label>
+  <div class="col-sm-9">
+    <input type="text" ng-model="equipament.cost" name="cost" required class="form-control" />
   </div>
-  <div class="actions">
-    <%= f.submit %>
+</div>
+<div class="form-group">
+  <div style="text-align:center">
+    <button type="submit" class="btn btn-primary btn-lg" ng-disabled="form_equipament.$invalid"><span class="fa fa-save"></span> Salvar </button>
   </div>
+</div>
 <% end %>

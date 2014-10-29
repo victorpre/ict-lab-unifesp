@@ -1,13 +1,24 @@
 labIct.factory('EquipsService', function ($http) {
-	function adiciona(equipamento) {
-		
-	}
-
 	function listar() {
 		return $http({
 			url: '/equips.json',
 			method: 'GET',
 			async: false,
+		});
+	}
+
+	function cadastrar(equipamento){
+		return $http({
+			url: '/equips',
+			method: 'POST',
+			async: false,
+			data:
+			{
+				"name": equipamento.name,
+				"model": equipamento.model,
+				"patrimony_id": equipamento.patrimony, 
+				"cost": equipamento.cost,
+			}
 		});
 	}
 
@@ -20,8 +31,8 @@ labIct.factory('EquipsService', function ($http) {
 	}
 
 	return{
-		adiciona: adiciona,
 		listar: listar,
 		deletar: deletar,
+		cadastrar: cadastrar,
 	};
 })

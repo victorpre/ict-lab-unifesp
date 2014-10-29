@@ -1,40 +1,47 @@
 function EquipsCtrl ($scope, EquipsService) {
 	$scope.numeroRegistros = 5;
-	$scope.equipamentos = {};
+	$scope.equipament = {}
+	$scope.equipaments = {};
 	$scope.paginaAtual = 0;
 
 	$scope.numeroPaginas =function(){
-        return Math.ceil($scope.equipamentos.length/$scope.numeroRegistros);                
+        return Math.ceil($scope.equipaments.length/$scope.numeroRegistros);                
     }
 
-	$scope.adicionaEquipamento = function() {
-		// body...
-	}
+    $scope.cadastrar = function() {
+    	if ($scope.form_equipament.$valid) {
+			EquipsService.cadastrar($scope.equipament).success(function(){
+				window.location = "/equips";
+			}).error(function (erros) {
+				//Configurar mensagem de erro ao usuário
+				alert("deu erro nessa budega");
+			});
+	    }else{
+    		console.log("Erros no formulário");	
+	    }
+    }
 
 	$scope.deletar = function (idx) {
-		var equipamento = $scope.equipamentos[idx];
+		var equipament = $scope.equipaments[idx];
 
-		if ( window.confirm("Tem certeza que deseja excluir? ") ) {
-            EquipsService.deletar(equipamento.id).success(function(){
-				$scope.equipamentos.splice(idx, 1);
+		if (window.confirm("Tem certeza que deseja excluir? ")) {
+            EquipsService.deletar(equipament.id).success(function(){
+				$scope.equipaments.splice(idx, 1);
 			}).error(function (erros) {
 				//Configurar mensagem de erro ao usuário
 				alert("deu erro nessa budega");
 			});
         }
-
-			
 	}
 
 	$scope.listar = function () {
 		EquipsService.listar().success(function (equips) {
-			$scope.equipamentos = equips;
+			$scope.equipaments = equips;
 		}).error(function (erros) {
 			//Configurar mensagem de erro ao usuário
 			alert("deu erro nessa budega");
 		});
 	}
 
-
-  $scope.listar();
+  	$scope.listar();
 }

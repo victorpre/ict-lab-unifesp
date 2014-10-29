@@ -2363,3 +2363,11 @@ td.beauty-hover {
 .fa-pencil, .fa-trash-o {
   color:#339054;
 }
+
+input.ng-invalid {
+  border: 1px solid red;
+}
+
+.borda-redonda {
+  border-radius: 10px;
+}

@@ -21,7 +21,7 @@
         <select ng-model="numeroRegistros">
           <option value="5">5</option>
           <option value="10">10</option>
-          <option value={{equipamentos.length}}>Todos</option>
+          <option value={{equipament.length}}>Todos</option>
         </select>
         <label>Registros</label>
       </div>
@@ -37,7 +37,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="equip in equipamentos | startFrom:paginaAtual*numeroRegistros | limitTo:numeroRegistros">
+          <tr ng-repeat="equip in equipaments | startFrom:paginaAtual*numeroRegistros | limitTo:numeroRegistros">
             <td>{{ equip.name }}</td>
             <td>{{ equip.model }}</td>
             <td>{{ equip.patrimony_id }}</td>
@@ -51,7 +51,7 @@
       <div style="text-align:rigth">
         <button ng-disabled="paginaAtual == 0" ng-click="paginaAtual=paginaAtual-1"><<</button>
         {{paginaAtual+1}}/{{numeroPaginas()}}
-        <button ng-disabled="paginaAtual >= equipamentos.length/numeroRegistros - 1" ng-click="paginaAtual=paginaAtual+1">>></button>
+        <button ng-disabled="paginaAtual >= equipament.length/numeroRegistros - 1" ng-click="paginaAtual=paginaAtual+1">>></button>
       </div>
 
   </div>

@@ -1,6 +1,17 @@
-<h1>Editing equip</h1>
+<%= javascript_include_tag "equips" %>
 
-<%= render 'form' %>
+<div ng-controller="EquipsCtrl">
+  <div id="breadcrumb" class="col-xs-12">
+    <ol class="breadcrumb">
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Equipamentos', equips_path %></li>
+      <li style="color:#d8d8d8">Editar</li>
+    </ol>
+  </div>
+</div>
 
-<%= link_to 'Show', @equip %> |
-<%= link_to 'Back', equips_path %>
+<div class="col-sm-6 col-sm-offset-3">
+  <form name="form_equipament" novalidate ng-submit="editar()">
+    <%= render 'form' %>
+  </form>
+</div>
