@@ -21,7 +21,7 @@
         <select ng-model="numeroRegistros">
           <option value="5">5</option>
           <option value="10">10</option>
-          <option value={{equipament.length}}>Todos</option>
+          <option value={{equipaments.length}}>Todos</option>
         </select>
         <label>Registros</label>
       </div>
@@ -51,7 +51,7 @@
       <div style="text-align:rigth">
         <button ng-disabled="paginaAtual == 0" ng-click="paginaAtual=paginaAtual-1"><<</button>
         {{paginaAtual+1}}/{{numeroPaginas()}}
-        <button ng-disabled="paginaAtual >= equipament.length/numeroRegistros - 1" ng-click="paginaAtual=paginaAtual+1">>></button>
+        <button ng-disabled="paginaAtual >= equipaments.length/numeroRegistros - 1" ng-click="paginaAtual=paginaAtual+1">>></button>
       </div>
 
   </div>

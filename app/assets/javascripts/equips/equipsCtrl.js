@@ -1,6 +1,6 @@
 function EquipsCtrl ($scope, EquipsService) {
 	$scope.numeroRegistros = 5;
-	$scope.equipament = {}
+	$scope.equipament = {};
 	$scope.equipaments = {};
 	$scope.paginaAtual = 0;
 
@@ -16,8 +16,6 @@ function EquipsCtrl ($scope, EquipsService) {
 				//Configurar mensagem de erro ao usuário
 				alert("deu erro nessa budega");
 			});
-	    }else{
-    		console.log("Erros no formulário");	
 	    }
     }
 

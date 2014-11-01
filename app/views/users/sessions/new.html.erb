@@ -12,10 +12,14 @@
           <%= f.password_field :password, :class=>'form-control input-lg', :placeholder=>"Senha" %>
       </div>
       <div class="modal-footer">
-        <div class="col-md-12">
-          <%= f.submit "Entrar", :class=>'btn btn-primary btn-lg'%>
+        <div class="col-md-6" style="text-align:left">
+          <%= link_to "Registre-se",  {controller: "registrations", action: "new"}, :class=>"btn btn-primary btn-lg" %>
+        </div>
+        <div class="col-md-6">
+          <%= button_tag(type: 'submit', class: "btn btn-primary btn-lg") do %>
+            <i class="fa fa-sign-in"></i> Entrar
+          <% end %>
         <% end %>
-        <%= link_to "Registre-se", new_user_registration_path %>
         </div>  
       </div>
     </div>
