@@ -4,4 +4,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true
+
+  def active_for_authentication? 
+    super && !locked? 
+  end 
+
+  def inactive_message 
+    if locked? 
+      :locked 
+    else 
+      super # Use whatever other message 
+    end 
+  end
 end

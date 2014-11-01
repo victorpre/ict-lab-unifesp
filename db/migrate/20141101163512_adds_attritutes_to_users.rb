@@ -6,6 +6,7 @@ class AddsAttritutesToUsers < ActiveRecord::Migration
       t.integer :type
       t.boolean :internal
       t.string :institution
+      t.boolean :locked, default: true
     end
   end
 end
