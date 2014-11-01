@@ -10,6 +10,8 @@ gem "twitter-bootstrap-rails"
 gem 'rails', '4.1.6'
 # Postgresql database
 gem 'pg'
+# Pry
+gem 'pry'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets

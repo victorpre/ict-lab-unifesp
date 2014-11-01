@@ -40,7 +40,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # You can put the params you want to permit in the empty array.
   # def configure_sign_up_params
-  #   devise_parameter_sanitizer.for(:sign_up) << :attribute
+  #   devise_parameter_sanitizer.for(:sign_up) << :name
+  # end
+
+  # def configure_permitted_parameters
+  #   devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :ra, :role, :type, :internal, :institution, :email, :password, :password_confirmation, :remember_me) }
+  #   devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:name, :ra, :role, :type, :internal, :institution, :email, :password, :password_confirmation, :remember_me) }
   # end
 
   # You can put the params you want to permit in the empty array.
@@ -87,6 +92,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
  
   def account_update_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password)
+    params.require(:user).permit(:name, :ra, :role, :type, :internal, :institution, :email, :password, :password_confirmation, :current_password)
   end
 end
