@@ -20,4 +20,22 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+        name: "Nome"
+    errors:
+      models:
+        user:
+         attributes:
+          email:
+            blank: "não pode estar vazio"
+          password:
+            blank: "não pode ser vazia"
+          name:
+            blank: "não pode ser vazio"
+          password_confirmation:
+            blank: "não pode ser vazia"
