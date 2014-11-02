@@ -16,7 +16,22 @@ labIct.factory('EquipsService', function ($http) {
 			{
 				"name": equipamento.name,
 				"model": equipamento.model,
-				"patrimony_id": equipamento.patrimony, 
+				"patrimony_id": equipamento.patrimony_id, 
+				"cost": equipamento.cost,
+			}
+		});
+	}
+
+	function editar(equipamento){
+		return $http({
+			url: '/equips/'+equipamento.id+'',
+			method: 'PUT',
+			async: false,
+			data:
+			{
+				"name": equipamento.name,
+				"model": equipamento.model,
+				"patrimony_id": equipamento.patrimony_id, 
 				"cost": equipamento.cost,
 			}
 		});
@@ -34,5 +49,6 @@ labIct.factory('EquipsService', function ($http) {
 		listar: listar,
 		deletar: deletar,
 		cadastrar: cadastrar,
+		editar: editar,
 	};
 })
