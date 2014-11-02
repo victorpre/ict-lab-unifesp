@@ -20,7 +20,9 @@ class EquipsController < ApplicationController
   end
 
   def create
-    @equip = Equip.new(equip_params)
+    parsed_params = parse_cost(equip_params)
+    binding.pry
+    @equip = Equip.new(parsed_params)
     @equip.save
     redirect_to :action => 'index'
   end
@@ -36,6 +38,12 @@ class EquipsController < ApplicationController
   end
 
   private
+    def parse_cost(params)
+      new_params=params
+      new_params["cost"]=new_params["cost"].gsub(",",".")
+      new_params
+    end
+
     def set_equip
       @equip = Equip.find(params[:id])
     end
