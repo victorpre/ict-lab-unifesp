@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :equips
   devise_for :users, :skip => [:sessions, :registrations], :controllers => { :registrations => "users/registrations", :sessions => "users/sessions" }
+  resources :users, only: [:index, :approve]
   as :user do
     # devise/sessions
     get 'login' => 'users/sessions#new', :as => :new_user_session
@@ -11,7 +12,9 @@ Rails.application.routes.draw do
     get 'signup' => 'users/registrations#new', :as => :new_user_registration
     post 'signup' => 'users/registrations#create'
 
-    get 'edit_profile' => 'users/registrations#edit', :as => :edit_user_registration
+    get 'users/show/:id' => 'users#show', :as => :user
+    get 'users/index' => 'users#index', :as => :user_index
+    get 'edit_profile/:id' => 'users/registrations#edit', :as => :edit_user_registration
     put 'update_profile/:id' => 'users/registrations#update', :as => :update_user_registration
 
     get 'cancel' => 'users/registrations#cancel', :as => :cancel_user_registration

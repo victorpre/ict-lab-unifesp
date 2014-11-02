@@ -64,7 +64,7 @@
                       <ul class="dropdown-menu" role="menu">
                         <li>
                             <i class="fa fa-user"></i>
-                            <span><%= link_to 'Profile', edit_user_registration_path %></span>
+                            <span><%= link_to 'Profile', edit_user_registration_path(current_user.try(:id)) %></span>
                         </li>
                         <li>
                             <i class="fa fa-power-off"></i>
@@ -98,7 +98,7 @@
                 </a>
               </li>
               <li>
-                <a href="templates/usuarios.html" class="ajax-link">
+                <a href='/users/index' class="ajax-link">
                   <i class="fa fa-user"></i>
                   <span class="hidden-xs">Usuários</span>
                 </a>
