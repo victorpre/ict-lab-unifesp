@@ -27,7 +27,7 @@ class EquipsController < ApplicationController
 
   def update
     @equip.update(equip_params)
-    respond_with(@equip)
+    render status: 200, json: @controller.to_json
   end
 
   def destroy
