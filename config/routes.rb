@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :equips
   devise_for :users, :skip => [:sessions, :registrations], :controllers => { :registrations => "users/registrations", :sessions => "users/sessions" }
-  resources :users, only: [:index, :approve]
+  resources :users, only: [:index, :approve, :delete, :cancel]
   as :user do
     # devise/sessions
     get 'login' => 'users/sessions#new', :as => :new_user_session
@@ -17,9 +17,10 @@ Rails.application.routes.draw do
     get 'edit_profile/:id' => 'users/registrations#edit', :as => :edit_user_registration
     put 'update_profile/:id' => 'users/registrations#update', :as => :update_user_registration
 
-    get 'cancel' => 'users/registrations#cancel', :as => :cancel_user_registration
-    delete 'cancel' => 'users/registrations#destroy'
+    #get 'cancel/:id' => 'users/#cancel', :as => :cancel_user_registration
   end
+  delete 'users/:id' => 'users/#destroy'
+
   root to: "home#index"
 
   get 'new_equip' => 'equips#new', :as => :new_equip_registration

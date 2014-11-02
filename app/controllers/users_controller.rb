@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :xml, :json
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+    respond_with(@users)
   end
 
   # GET /users/1
@@ -56,11 +58,10 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    @user = User.find(params[:id])
+    binding.pry
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    render status: 200, json: @controller.to_json
   end
 
   private
@@ -71,6 +72,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params[:user]
+      params.require(:user).permit(:name, :ra, :role, :type, :internal, :institution, :email, :password, :password_confirmation, :current_password)
     end
 end

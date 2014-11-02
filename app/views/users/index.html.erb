@@ -1,23 +1,54 @@
-<h1>Listing users</h1>
+<%= javascript_include_tag "users" %>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_registration_path(user.id) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<div id="breadcrumb" class="col-xs-12">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Usuários', users_path %></li>
+  </ol>
+</div>
 
 
+<div class="row" ng-controller="UsersCtrl">
+  <div class="col-sm-12">
+    <div class="container row">
+      <label>Mostrar:</label>
+      <select ng-model="numeroRegistros">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value={{users.length}}>Todos</option>
+      </select>
+      <label>Registros</label>
+    </div>
+
+    <table class="table table-striped table-bordered table-hover table-heading no-border-bottom">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Função</th>
+          <th>Tipo</th>
+          <th>Bloqueado</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in users | startFrom:paginaAtual*numeroRegistros | limitTo:numeroRegistros">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>{{ user.type }}</td>
+          <td>{{ user.locked }}</td>
+          <td class="centralizar"><a href="/users/{{equip.id}}/edit"><i class="fa fa-pencil"></i></a></td>
+          <td class="centralizar"><a href="#" ng-click="deletar($index)"><i class="fa fa-trash-o"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="text-align:rigth">
+      <button ng-disabled="paginaAtual == 0" ng-click="paginaAtual=paginaAtual-1"><<</button>
+      {{paginaAtual+1}}/{{numeroPaginas()}}
+      <button ng-disabled="paginaAtual >= users.length/numeroRegistros - 1" ng-click="paginaAtual=paginaAtual+1">>></button>
+    </div>
+
+  </div>
+</div>
