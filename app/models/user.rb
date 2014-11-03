@@ -5,6 +5,22 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true
 
+  def unlock(user)
+    if self.admin? && user.locked?
+      user.locked = false
+      user.save
+    end
+  end
+
+  def admin?
+    return true if self.role == 1
+    return false
+  end
+
+  def locked?
+    self.locked
+  end
+
   def active_for_authentication? 
     super && !locked? 
   end 
