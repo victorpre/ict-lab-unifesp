@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :unlock]
   respond_to :html, :xml, :json
 
   # GET /users
@@ -58,12 +58,25 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    render status: 200, json: @controller.to_json
+    if current_user.admin?
+      @user = User.find(params[:id])
+      @user.destroy
+      render status: 200, json: @controller.to_json
+    else
+      render status: 500, json: @controller.to_json
+    end
+  end
+
+  def unlock
+    if current_user.unlock(@user)
+      render status: 200, json: @controller.to_json
+    else
+      render status: 500, json: @controller.to_json
+    end
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
