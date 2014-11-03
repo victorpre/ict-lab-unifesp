@@ -59,7 +59,6 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
-    binding.pry
     @user.destroy
     render status: 200, json: @controller.to_json
   end

@@ -17,9 +17,12 @@ Rails.application.routes.draw do
     get 'edit_profile/:id' => 'users/registrations#edit', :as => :edit_user_registration
     put 'update_profile/:id' => 'users/registrations#update', :as => :update_user_registration
 
+    #delete 'users/:id' => 'users/#destroy'
     #get 'cancel/:id' => 'users/#cancel', :as => :cancel_user_registration
   end
-  delete 'users/:id' => 'users/#destroy'
+  
+  delete 'users/:id' => 'users#destroy', :as => :admin_destroy_user
+
 
   root to: "home#index"
 
