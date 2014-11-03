@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :equips
   devise_for :users, :skip => [:sessions, :registrations], :controllers => { :registrations => "users/registrations", :sessions => "users/sessions" }
-  resources :users, only: [:index, :approve, :delete, :cancel]
+  resources :users, only: [:index, :unlock, :delete, :cancel]
   as :user do
     # devise/sessions
     get 'login' => 'users/sessions#new', :as => :new_user_session
@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   get 'edit_equip' => 'equips/registrations#edit', :as => :edit_equip_registration
   put 'edit_equip' => 'equips/registrations#update'
+
+  get 'users/:id' => 'users#unlock', :as => :unlock_registration
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
