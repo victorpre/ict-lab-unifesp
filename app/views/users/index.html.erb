@@ -44,7 +44,7 @@
       </tbody>
     </table>
 
-    <div style="text-align:rigth">
+    <div class="row" style="text-align:center">
       <button ng-disabled="paginaAtual == 0" ng-click="paginaAtual=paginaAtual-1"><<</button>
       {{paginaAtual+1}}/{{numeroPaginas()}}
       <button ng-disabled="paginaAtual >= users.length/numeroRegistros - 1" ng-click="paginaAtual=paginaAtual+1">>></button>

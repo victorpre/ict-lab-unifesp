@@ -16,7 +16,7 @@
 
       <div style="text-align:center" class="container row">
         <%= link_to new_equip_registration_path, :class=>"btn btn-primary"  do %>
-          <i class="fa fa-plus"></i> Novo
+          <i class="fa fa-plus"></i> Adicionar
         <% end %>
       </div>
 
@@ -52,7 +52,7 @@
         </tbody>
       </table>
 
-      <div style="text-align:rigth">
+      <div class="row" style="text-align:center">
         <button ng-disabled="paginaAtual == 0" ng-click="paginaAtual=paginaAtual-1"><<</button>
         {{paginaAtual+1}}/{{numeroPaginas()}}
         <button ng-disabled="paginaAtual >= equipaments.length/numeroRegistros - 1" ng-click="paginaAtual=paginaAtual+1">>></button>
