@@ -28,13 +28,16 @@ function SchedulingCtrl($scope) {
     /* add custom event*/
     $scope.addEvent = function() {
 
-      var startDate = $scope.schedule.startDate.split("/");
-      var endDate = $scope.schedule.endDate.split("/");
+
+      var startDate = moment($scope.schedule.startDate, "YYYY-MM-DD");
+      startDate = startDate.toDate();
+      var endDate = moment($scope.schedule.endDate, "YYYY-MM-DD");
+      endDate = endDate.toDate();
       var startTime = $scope.schedule.startTime.split(":");
       var endTime = $scope.schedule.endTime.split(":");
 
-      var startDateEvent = new Date(startDate[2], startDate[1], startDate[0], startTime[0], startTime[1]);
-      var endDateEvent = new Date(endDate[2], endDate[1], endDate[0], endTime[0], endTime[1]);
+      var startDateEvent = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), startTime[0], startTime[1]);
+      var endDateEvent = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), endTime[0], endTime[1]);
 
       $scope.events.push({
         title: $scope.schedule.nomeUsuario,
