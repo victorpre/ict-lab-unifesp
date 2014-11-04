@@ -16,24 +16,28 @@ Rails.application.routes.draw do
     get 'users/show/:id' => 'users#show', :as => :user
     get 'users/index' => 'users#index', :as => :user_index
     get 'edit_profile/:id' => 'users/registrations#edit', :as => :edit_user_registration
+    patch 'edit_profile/:id' => 'users/registrations#update'
     put 'update_profile/:id' => 'users/registrations#update', :as => :update_user_registration
 
     #delete 'users/:id' => 'users/#destroy'
     #get 'cancel/:id' => 'users/#cancel', :as => :cancel_user_registration
   end
-  
-  delete 'users/:id' => 'users#destroy', :as => :admin_destroy_user
-
 
   root to: "home#index"
 
+  # Users routes
+
+  get 'users/:id' => 'users#unlock', :as => :unlock_registration
+
+
+  # Equips routes
   get 'new_equip' => 'equips#new', :as => :new_equip_registration
   post 'new_equip' => 'equips#create', :as => :equip_registration
-
   get 'edit_equip' => 'equips/registrations#edit', :as => :edit_equip_registration
   put 'edit_equip' => 'equips/registrations#update'
 
-  get 'users/:id' => 'users#unlock', :as => :unlock_registration
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

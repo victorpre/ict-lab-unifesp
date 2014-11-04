@@ -15,14 +15,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
    def edit
-     super
      @user = User.find(params[:id])
+
    end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    respond_to do |format|
+      @user = User.find(params[:id])
+      if @user.update(account_update_params)
+        format.html { redirect_to user_index_path, notice: 'User was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /resource
   def destroy
