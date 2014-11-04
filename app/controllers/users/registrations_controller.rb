@@ -1,7 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
-
+before_filter :verify_is_admin, only: [:admin_edit,:admin_update]
 
   # GET /resource/sign_up
   # def new
@@ -14,24 +14,33 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-   def edit
-     @user = User.find(params[:id])
-
-   end
+   # def edit
+   #   @user = User.find(params[:id])
+   # end
 
   # PUT /resource
-  def update
-    respond_to do |format|
-      @user = User.find(params[:id])
-      if @user.update(account_update_params)
-        format.html { redirect_to user_index_path, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+  #def update
+  # super
+  #end
+
+  def admin_edit
+    @user = User.find(params[:id])
   end
+
+  def admin_update
+    if current_user.admin?
+      respond_to do |format|
+        @user = User.find(params[:id])
+        if @user.update(account_update_params)
+          format.html { redirect_to user_index_path, notice: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      end
+    end  
+  end 
 
   # DELETE /resource
   def destroy
@@ -75,6 +84,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  private
+
+  def verify_is_admin
+    (current_user.nil?) ? redirect_to(root_path) : (redirect_to(root_path) unless current_user.admin?)
+  end
 
   protected
 

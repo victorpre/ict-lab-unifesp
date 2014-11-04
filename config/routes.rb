@@ -19,6 +19,11 @@ Rails.application.routes.draw do
     patch 'edit_profile/:id' => 'users/registrations#update'
     put 'update_profile/:id' => 'users/registrations#update', :as => :update_user_registration
 
+    get 'admin/users/:id' => 'users/registrations#admin_edit', :as => :admin_edit_user_registration
+    patch 'admin/users/:id' => 'users/registrations#admin_update'
+    put 'admin/users/:id' => 'users/registrations#admin_update', :as => :admin_update_user_registration
+
+
     #delete 'users/:id' => 'users/#destroy'
     #get 'cancel/:id' => 'users/#cancel', :as => :cancel_user_registration
   end

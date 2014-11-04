@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :unlock]
   respond_to :html, :xml, :json
+  before_filter :verify_is_admin, only: [:index]
+
 
   # GET /users
   # GET /users.json
@@ -76,6 +78,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def verify_is_admin
+    (current_user.nil?) ? redirect_to(root_path) : (redirect_to(root_path) unless current_user.admin?)
+  end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_user
