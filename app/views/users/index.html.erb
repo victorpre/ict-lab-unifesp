@@ -38,7 +38,7 @@
           <td>{{ user.role }}</td>
           <td>{{ user.type }}</td>
           <td>{{ user.locked }}</td>
-          <td class="centralizar"><a href="/edit_profile/{{user.id}}"><i class="fa fa-pencil"></i></a></td>
+          <td class="centralizar"><a href="/admin/users/{{user.id}}"><i class="fa fa-pencil"></i></a></td>
           <td class="centralizar"><a href="#" ng-click="deletar($index)"><i class="fa fa-trash-o"></i></a></td>
         </tr>
       </tbody>
