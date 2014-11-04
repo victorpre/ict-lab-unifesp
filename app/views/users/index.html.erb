@@ -12,10 +12,10 @@
   <div class="col-sm-12">
     <div class="container row">
       <label>Mostrar:</label>
-      <select ng-model="numeroRegistros">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value={{users.length}}>Todos</option>
+      <select ng-model="numeroRegistros" >
+        <option value="5" ng-click="mudaParaPaginaInicial">5</option>
+        <option value="10" ng-click="mudaParaPaginaInicial">10</option>
+        <option value={{users.length}} ng-click="mudaParaPaginaInicial">Todos</option>
       </select>
       <label>Registros</label>
     </div>
@@ -38,7 +38,7 @@
           <td>{{ user.role }}</td>
           <td>{{ user.type }}</td>
           <td>{{ user.locked }}</td>
-          <td class="centralizar"><a href="/users/{{equip.id}}/edit"><i class="fa fa-pencil"></i></a></td>
+          <td class="centralizar"><a href="/edit_profile/{{user.id}}"><i class="fa fa-pencil"></i></a></td>
           <td class="centralizar"><a href="#" ng-click="deletar($index)"><i class="fa fa-trash-o"></i></a></td>
         </tr>
       </tbody>

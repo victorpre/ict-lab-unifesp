@@ -21,7 +21,6 @@ class EquipsController < ApplicationController
 
   def create
     parsed_params = parse_cost(equip_params)
-    binding.pry
     @equip = Equip.new(parsed_params)
     @equip.save
     redirect_to :action => 'index'

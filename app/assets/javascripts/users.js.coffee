@@ -2,4 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+#= require_tree ./moment
+#= require_tree ./fullcallendar
+#= require_tree ./scheduling
 #= require_tree ./users

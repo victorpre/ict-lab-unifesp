@@ -5,4 +5,3 @@
 #= require_tree ./moment
 #= require_tree ./fullcallendar
 #= require_tree ./scheduling
-#= require_tree ./equips

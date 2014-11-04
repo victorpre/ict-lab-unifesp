@@ -1,0 +1,88 @@
+<%= javascript_include_tag "scheduling" %>
+
+<script>
+	nomeUsuario = "<%= current_user.name %>";
+
+</script>
+
+<div id="breadcrumb" class="col-xs-12">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Agendamento', users_path %></li>
+  </ol>
+</div>
+
+<div class="row" ng-controller="SchedulingCtrl">
+  <div class="col-sm-12">
+  	<div class="form-group row">
+  	  <div class="col-sm-1">
+  		<label>Equipamento:</label>
+  	  </div>
+  	  <div class="col-sm-4">
+  		<select class="form-control">
+	      <% Equip.all.each do |equip| %>
+	  		<option value/="<%=equip.id %>"><%= equip.name %></option>
+	  	  <% end %>
+	  	</select>
+  	  </div>
+  	  <div class="col-sm-1">
+  	  	<button class="btn btn-primary" data-toggle="modal" data-target="#modalAgendamento"><i class="fa fa-plus"></i> Novo</button> 
+  	  </div>
+  	</div>
+
+	<div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> 
+  </div>
+
+  <div id="modalAgendamento" tabindex="-1" class="modal fade">
+	<div  class="modal-dialog">
+	    <div class="modal-content  modal-login">
+	        <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	            <h4 class="modal-title center">Novo agendamento</h4>
+	        </div>
+	         <div class="modal-body">
+	         	<form name="form_schedule" novalidate ng-submit="cadastrar()">
+			        <div class="row form-group">
+				      <div class="col-sm-3">
+				      	<label>Dt início:</label>
+				      </div> 
+				      <div class="col-sm-3">
+				        <input type="text" class="form-control" ng-model="schedule.startDate" name="startDate" />
+			          </div>
+				      <div class="col-sm-3" style="text-align:right">
+				      	<label>Hora início:</label>
+				      </div> 
+				      <div class="col-sm-3">
+				        <input type="text" class="form-control" ng-model="schedule.startTime" name="startTime" />
+			          </div>
+		      		</div>	
+		      		<div class="row form-group">
+				      <div class="col-sm-3">
+				      	<label>Dt Término:</label>
+				      </div> 
+				      <div class="col-sm-3">
+				        <input type="text" class="form-control" ng-model="schedule.endDate" name="endDate" />
+			          </div>
+				      <div class="col-sm-3" style="text-align:right">
+				      	<label>Hora Término:</label>
+				      </div> 
+				      <div class="col-sm-3">
+				        <input type="text" class="form-control" ng-model="schedule.endTime" name="endTime" />
+			          </div>
+		      		</div>
+		      	</form>
+	      	</div>
+	        <div class="modal-footer">
+	            <div style="text-align:right;">
+	                <button type="button" class="btn btn-primary" ng-click="addEvent()" data-dismiss="modal"><i class="fa fa-save"></i> Salvar</button>
+	            </div>
+	        </div>
+	    </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+</div>
+
+
+

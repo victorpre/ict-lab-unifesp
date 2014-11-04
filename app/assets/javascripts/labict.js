@@ -1,4 +1,4 @@
-var labIct = angular.module("labIct", []);
+var labIct = angular.module("labIct", ['ui.calendar']);
 
 labIct.filter('startFrom', function() {
     return function(input, start) {

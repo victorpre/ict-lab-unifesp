@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :equips
+  resources :scheduling
   devise_for :users, :skip => [:sessions, :registrations], :controllers => { :registrations => "users/registrations", :sessions => "users/sessions" }
   resources :users, only: [:index, :unlock, :delete, :cancel]
   as :user do

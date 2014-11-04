@@ -9,6 +9,10 @@ labIct.controller("UsersCtrl", function($scope, UsersService) {
       return Math.ceil($scope.users.length/$scope.numeroRegistros);                
     }
 
+    $scope.mudaParaPaginaInicial = function () {
+      $scope.paginaAtual = 1;
+    }
+
     $scope.deletar = function (idx) {
       var user = $scope.users[idx];
 
