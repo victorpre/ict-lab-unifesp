@@ -32,10 +32,10 @@ before_filter :verify_is_admin, only: [:admin_edit,:admin_update]
       respond_to do |format|
         @user = User.find(params[:id])
         if @user.update(account_update_params)
-          format.html { redirect_to user_index_path, notice: 'User was successfully updated.' }
+          format.html { redirect_to user_index_path, notice: 'Usuário editado com sucesso!' }
           format.json { render :show, status: :ok, location: @user }
         else
-          format.html { render :edit }
+          format.html { render :admin_edit }
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end

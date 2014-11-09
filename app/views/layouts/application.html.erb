@@ -39,6 +39,7 @@
 
   </head>
   <body>
+
     <% if user_signed_in? %>
 
       <a name="groups"></a>
@@ -91,13 +92,13 @@
                   <span class="hidden-xs">Agendamento</span>
                 </a>
               </li>
+               <% if current_user.admin? %>
               <li>
                 <a href="/equips" class="ajax-link">
                   <i class="fa fa-flask"></i>
                   <span class="hidden-xs">Equipamentos</span>
                 </a>
               </li>
-              <% if current_user.admin? %>
               <li>
                 <a href='/users/index' class="ajax-link">
                   <i class="fa fa-user"></i>
@@ -110,7 +111,7 @@
 
           <div id="content" class="col-xs-12 col-sm-10">
             <div class="row">
-              <%= render partial: "shared/flash_messages", flash: flash %> 
+            
               <%= yield %>
             </div>
           </div>

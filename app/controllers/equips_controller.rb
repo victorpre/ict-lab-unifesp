@@ -1,6 +1,7 @@
 class EquipsController < ApplicationController
   before_action :set_equip, only: [:show, :edit, :update, :destroy]
   respond_to :html, :xml, :json
+  before_filter :verify_is_admin
 
   def index
     @equips = Equip.all
@@ -27,8 +28,10 @@ class EquipsController < ApplicationController
   end
 
   def update
-    @equip.update(equip_params)
-    render status: 200, json: @controller.to_json
+    parsed_params = parse_cost(equip_params)
+    @equip.update(parsed_params)
+    @equip.save
+    render status: 200, json: @controller.to_json, notice: 'Usuário criado com sucesso!'
   end
 
   def destroy
@@ -37,17 +40,22 @@ class EquipsController < ApplicationController
   end
 
   private
-    def parse_cost(params)
-      new_params=params
-      new_params["cost"]=new_params["cost"].gsub(",",".")
-      new_params
-    end
 
-    def set_equip
-      @equip = Equip.find(params[:id])
-    end
+  def verify_is_admin
+    (current_user.nil?) ? redirect_to(root_path) : (redirect_to(root_path) unless current_user.admin?)
+  end
 
-    def equip_params
-      params.require(:equip).permit(:name, :model, :patrimony_id, :cost)
-    end
+  def parse_cost(params)
+    new_params=params
+    new_params["cost"] = new_params["cost"].to_s.gsub(",",".")
+    new_params
+  end
+
+  def set_equip
+    @equip = Equip.find(params[:id])
+  end
+
+  def equip_params
+    params.require(:equip).permit(:name, :model, :patrimony_id, :cost)
+  end
 end
