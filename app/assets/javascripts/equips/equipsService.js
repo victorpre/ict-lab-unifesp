@@ -38,6 +38,7 @@ labIct.factory('EquipsService', function ($http) {
 	}
 
 	function deletar (id) {
+		console.log(id);
 		return $http({
 			url: '/equips/'+id+'',
 			method: 'DELETE',

@@ -21,7 +21,7 @@
   	  <div class="col-sm-4">
   		<select class="form-control">
 	      <% Equip.all.each do |equip| %>
-	  		<option value/="<%=equip.id %>"><%= equip.name %></option>
+	  		<option value/="<%=equip.id %>"><%= equip.name + " - " + equip.patrimony_id %></option>
 	  	  <% end %>
 	  	</select>
   	  </div>

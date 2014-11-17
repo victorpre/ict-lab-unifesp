@@ -45,9 +45,9 @@
             <td>{{ equip.name }}</td>
             <td>{{ equip.model }}</td>
             <td>{{ equip.patrimony_id }}</td>
-            <td>{{ equip.cost }}</td>
+            <td>{{ equip.cost | currency }}</td>
             <td class="centralizar"><a href="/equips/{{equip.id}}/edit"><i class="fa fa-pencil"></i></a></td>
-            <td class="centralizar"><a href="#" ng-click="deletar($index)"><i class="fa fa-trash-o"></i></a></td>
+            <td class="centralizar"><a href="#" ng-click="deletar(equip.id)"><i class="fa fa-trash-o"></i></a></td>
           </tr>
         </tbody>
       </table>

@@ -3,7 +3,7 @@ labIct.controller("EquipsCtrl", function($scope, EquipsService) {
     $scope.numeroRegistros = 5;
     $scope.equipament = {};
     $scope.equipaments = [];
-    $scope.paginaAtual = 0;
+    $scope.paginaAtual = 1;
     $scope.equip_json = equip_json;
 
     $scope.numeroPaginas =function(){
@@ -14,22 +14,22 @@ labIct.controller("EquipsCtrl", function($scope, EquipsService) {
       if ($scope.form_equipament.$valid) {
         EquipsService.cadastrar($scope.equipament).success(function(){
           window.location = "/equips";
-        }).error(function (erros) {
-          //Configurar mensagem de erro ao usuário
-          alert("deu erro nessa budega");
+        }).error(function (response){
+            alert(response.responseText);
         });
       }
     }
 
-    $scope.deletar = function (idx) {
-      var equipament = $scope.equipaments[idx];
+    $scope.deletar = function (id) {
 
       if (window.confirm("Tem certeza que deseja excluir? ")) {
-        EquipsService.deletar(equipament.id).success(function(){
-          $scope.equipaments.splice(idx, 1);
-        }).error(function (erros) {
+        EquipsService.deletar(id).success(function(){
+          $scope.equipaments = $scope.equipaments.filter(function( obj ) {
+              return obj.id !== id;
+          });
+        }).error(function (xhr, err) {
           //Configurar mensagem de erro ao usuário
-          alert("deu erro nessa budega");
+          console.log(err);
         });
       }
     }
@@ -61,7 +61,6 @@ labIct.controller("EquipsCtrl", function($scope, EquipsService) {
       $scope.equipament.model = equipament.model;
       $scope.equipament.patrimony_id = equipament.patrimony_id;
     }
-
 
     $scope.listar();
 });
