@@ -13,17 +13,30 @@ labIct.controller("UsersCtrl", function($scope, UsersService) {
       $scope.paginaAtual = 1;
     }
 
-    $scope.deletar = function (idx) {
-      var user = $scope.users[idx];
-
+    $scope.deletar = function (id) {
       if (window.confirm("Tem certeza que deseja excluir? ")) {
-        UsersService.deletar(user.id).success(function(){
-          $scope.users.splice(idx, 1);
+        UsersService.deletar(id).success(function(){
+          $scope.users = $scope.users.filter(function( obj ) {
+              return obj.id !== id;
+          });
         }).error(function (erros) {
           //Configurar mensagem de erro ao usuário
           alert("deu erro nessa budega");
         });
       }
+    }
+
+    $scope.liberaTrava = function (id) {
+      UsersService.liberarUsuario(id).success(function(){
+        $scope.users.filter(function( obj ) {
+            if(obj.id == id){
+              obj.locked = false;
+            };
+        });
+      }).error(function (erros) {
+        //Configurar mensagem de erro ao usuário
+        alert("deu erro nessa budega");
+      });
     }
 
     $scope.editar = function () {

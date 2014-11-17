@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   # Users routes
 
   get 'users/:id' => 'users#unlock', :as => :unlock_registration
+  delete 'users/:id' => 'users#destroy', :as => :destroy_registration
 
 
   # Equips routes

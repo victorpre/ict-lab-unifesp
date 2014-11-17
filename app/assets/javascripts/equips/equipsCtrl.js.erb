@@ -3,7 +3,7 @@ labIct.controller("EquipsCtrl", function($scope, EquipsService) {
     $scope.numeroRegistros = 5;
     $scope.equipament = {};
     $scope.equipaments = [];
-    $scope.paginaAtual = 1;
+    $scope.paginaAtual = 0;
     $scope.equip_json = equip_json;
 
     $scope.numeroPaginas =function(){
@@ -27,6 +27,7 @@ labIct.controller("EquipsCtrl", function($scope, EquipsService) {
           $scope.equipaments = $scope.equipaments.filter(function( obj ) {
               return obj.id !== id;
           });
+          $scope.paginaAtual = 0;
         }).error(function (xhr, err) {
           //Configurar mensagem de erro ao usuário
           console.log(err);

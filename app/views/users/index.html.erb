@@ -37,9 +37,9 @@
           <td>{{ user.email }}</td>
           <td>{{ user.role }}</td>
           <td>{{ user.type }}</td>
-          <td>{{ user.locked }}</td>
+          <td class="centralizar"><a href="#" ng-click="liberaTrava(user.id)"><i class="fa" ng-class="{'fa-lock': user.locked == true , 'fa-unlock': user.locked == false } " title="{{ user.locked ? 'Desbloquear' : 'Bloquear'}}"></i></a> </td>
           <td class="centralizar"><a href="/admin/users/{{user.id}}"><i class="fa fa-pencil"></i></a></td>
-          <td class="centralizar"><a href="#" ng-click="deletar($index)"><i class="fa fa-trash-o"></i></a></td>
+          <td class="centralizar"><a href="#" ng-click="deletar(user.id)"><i class="fa fa-trash-o"></i></a></td>
         </tr>
       </tbody>
     </table>

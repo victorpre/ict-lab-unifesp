@@ -7,17 +7,14 @@ labIct.factory('UsersService', function ($http) {
     });
   }
 
-  function editar(equipamento){
+  function liberarUsuario(id) {
     return $http({
-      url: '/equips/'+equipamento.id+'',
-      method: 'PUT',
+      url: '/users/'+id+'',
+      method: 'GET',
       async: false,
       data:
       {
-        "name": equipamento.name,
-        "model": equipamento.model,
-        "patrimony_id": equipamento.patrimony_id, 
-        "cost": equipamento.cost,
+        "id": id,
       }
     });
   }
@@ -33,6 +30,6 @@ labIct.factory('UsersService', function ($http) {
   return{
     listar: listar,
     deletar: deletar,
-    editar: editar,
+    liberarUsuario: liberarUsuario,
   };
 })
