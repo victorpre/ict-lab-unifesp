@@ -18,5 +18,3 @@
 .DS_Store
 /config/database.yml
 .gitignore~
-
-Gemfile.lock
