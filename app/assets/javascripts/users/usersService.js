@@ -1,4 +1,4 @@
-labIct.factory('UsersService', function ($http) {
+labIct.factory('UsersService', ["$http", function ($http) {
   function listar() {
     return $http({
       url: '/users.json',
@@ -32,4 +32,4 @@ labIct.factory('UsersService', function ($http) {
     deletar: deletar,
     liberarUsuario: liberarUsuario,
   };
-})
+}])

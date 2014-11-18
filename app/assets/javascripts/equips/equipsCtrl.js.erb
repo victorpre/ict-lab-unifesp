@@ -1,4 +1,4 @@
-labIct.controller("EquipsCtrl", function($scope, EquipsService) {
+labIct.controller("EquipsCtrl", ["$scope", "EquipsService", function($scope, EquipsService) {
     
     $scope.numeroRegistros = 5;
     $scope.equipament = {};
@@ -64,4 +64,4 @@ labIct.controller("EquipsCtrl", function($scope, EquipsService) {
     }
 
     $scope.listar();
-});
+}]);

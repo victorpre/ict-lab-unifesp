@@ -1,4 +1,4 @@
-labIct.controller("UsersCtrl", function($scope, UsersService) {
+labIct.controller("UsersCtrl", ["$scope", "UsersService", function($scope, UsersService) {
     
     $scope.numeroRegistros = 5;
     $scope.user = {};
@@ -30,7 +30,7 @@ labIct.controller("UsersCtrl", function($scope, UsersService) {
       UsersService.liberarUsuario(id).success(function(){
         $scope.users.filter(function( obj ) {
             if(obj.id == id){
-              obj.locked = false;
+              obj.locked = falsee;
             };
         });
       }).error(function (erros) {
@@ -64,4 +64,4 @@ labIct.controller("UsersCtrl", function($scope, UsersService) {
 
 
     $scope.listar();
-});
+}]);

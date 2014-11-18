@@ -1,4 +1,4 @@
-labIct.factory('EquipsService', function ($http) {
+labIct.factory('EquipsService', ["$http", function ($http) {
 	function listar() {
 		return $http({
 			url: '/equips.json',
@@ -52,4 +52,4 @@ labIct.factory('EquipsService', function ($http) {
 		cadastrar: cadastrar,
 		editar: editar,
 	};
-})
+}]);
