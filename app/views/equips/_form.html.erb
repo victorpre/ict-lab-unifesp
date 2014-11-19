@@ -1,5 +1,15 @@
 <%= form_for(@equip) do |f| %>
+<% if @equip.errors.any? %>
+  <div id="error_explanation">
+        <h2><%= pluralize(@equip.errors.count, "error") %> prohibited this user from being saved:</h2>
 
+        <ul>
+        <% @equip.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+  </div>
+<% end %>
 <script>
     equip_json = <%= @equip.to_json.html_safe %>
 </script>

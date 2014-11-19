@@ -212,6 +212,16 @@ pt-BR:
         password: "Senha"
         password_confirmation: "Confirmação de senha"
         name: "Nome"
+        institution: "Instituição"
+        role: "Função"
+        locked: "Bloqueado"
+        type: "Tipo"
+        ra: "RA"
+      equip:
+        patrimony_id: "Patrimônio"
+        model: "Modelo"
+        name: "Nome"
+        cost: "Valor Hora"
 
   devise:
     confirmations:

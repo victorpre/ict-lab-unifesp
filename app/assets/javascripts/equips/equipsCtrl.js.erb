@@ -12,8 +12,12 @@ labIct.controller("EquipsCtrl", ["$scope", "$filter", "EquipsService", function(
 
     $scope.cadastrar = function() {
       if ($scope.form_equipament.$valid) {
-        EquipsService.cadastrar($scope.equipament).success(function(){
-          window.location = "/equips";
+        EquipsService.cadastrar($scope.equipament).success(function(data){
+          if(data.errors){
+            console.log(data.errors);
+          }else{
+            window.location = "/equips";
+          }
         }).error(function (response){
             alert(response.responseText);
         });

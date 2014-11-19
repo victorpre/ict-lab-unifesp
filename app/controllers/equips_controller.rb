@@ -23,8 +23,12 @@ class EquipsController < ApplicationController
   def create
     parsed_params = parse_cost(equip_params)
     @equip = Equip.new(parsed_params)
-    @equip.save
-    redirect_to :action => 'index'
+    if @equip.save
+      redirect_to :action => 'index'
+    else
+      binding.pry
+      render :json => { :errors => @equip.errors.full_messages }
+    end
   end
 
   def update
