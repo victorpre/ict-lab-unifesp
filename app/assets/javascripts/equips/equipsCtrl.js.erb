@@ -1,4 +1,4 @@
-labIct.controller("EquipsCtrl", ["$scope", "EquipsService", function($scope, EquipsService) {
+labIct.controller("EquipsCtrl", ["$scope", "$filter", "EquipsService", function($scope, $filter, EquipsService) {
     
     $scope.numeroRegistros = 5;
     $scope.equipament = {};
@@ -58,7 +58,7 @@ labIct.controller("EquipsCtrl", ["$scope", "EquipsService", function($scope, Equ
     $scope.carregar = function (equipament) {
       $scope.equipament.id = equipament.id;
       $scope.equipament.name = equipament.name;
-      $scope.equipament.cost = equipament.cost;
+      $scope.equipament.cost =  $filter('currency')(equipament.cost, "");
       $scope.equipament.model = equipament.model;
       $scope.equipament.patrimony_id = equipament.patrimony_id;
     }

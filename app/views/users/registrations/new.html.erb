@@ -24,8 +24,8 @@
 
            <div class="form-group row">
             <%=f.label :internal, "Tipo:",:class=>"col-sm-2" %>
-            <div class="col-sm-3">
-              <%= f.select :internal,([["Membro da UNIFESP - SJC",true],["Membro de outra UNIFESP",true],["Membro de outra instituição",false]]) %>
+            <div class="col-sm-8">
+              <%= f.select :internal,([["Membro da UNIFESP - SJC",true],["Membro de outra UNIFESP",true],["Membro de outra instituição",false]]), {}, { :class => 'form-control' } %>
             </div>
           </div>
 

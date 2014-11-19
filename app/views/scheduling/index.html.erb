@@ -19,7 +19,7 @@
   		<span>Equipamento:</span>
   	  </div>
   	  <div class="col-sm-4">
-  		<select class="form-control" ng-model="equipamentId" ng-options="equip.id as equip.id for equip in equips">
+  		<select class="form-control" ng-model="equipamentId" ng-options="equip.id as equip.name +' - '+ equip.patrimony_id for equip in equips">
   			<option value="">-- Selecione --</option>
 	  	</select>
   	  </div>
