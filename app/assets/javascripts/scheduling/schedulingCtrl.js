@@ -1,58 +1,92 @@
-labIct.controller("SchedulingCtrl", ["$scope", function($scope){
-  $scope.schedule = {}
-  $scope.schedule.nomeUsuario = nomeUsuario;
-
-  var date = new Date();
-  var d = date.getDate();
-  var m = date.getMonth();
-  var y = date.getFullYear();
+labIct.controller("SchedulingCtrl", ["$scope", "SchedulingService", function($scope, SchedulingService){
   
-  /* event source that contains custom events on the scope */
-  $scope.events = [
-    {title: 'User 1',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30), idEquipament: 1, allDay: false},
-    {title: 'User 2',start: new Date(y, m, d + 2, 19, 0),end: new Date(y, m, d + 2, 22, 30), idEquipament: 1, allDay: false},
-    {title: 'User 3',start: new Date(y, m, d + 3, 19, 0),end: new Date(y, m, d + 3, 22, 30), idEquipament: 1, allDay: false},
-    {title: 'User 4',start: new Date(y, m, d + 4, 19, 0),end: new Date(y, m, d + 4, 22, 30), idEquipament: 3, allDay: false},
-    {title: 'User 5',start: new Date(y, m, d + 5, 19, 0),end: new Date(y, m, d + 5, 22, 30), idEquipament: 3, allDay: false},
-  ];
+  $scope.schedule = {}
+  $scope.schedule.userName = userName;
+  $scope.shedulings = [{scheduleId: 1, title: 'User 1',start: new Date(2014, 10, 10 + 1, 19, 30),end: new Date(2014, 10, 10 + 1, 22, 30), idEquipament: 1, allDay: false}];
+  $scope.userId = userId;
+  $scope.equipamentId = null;
+  $scope.equips = [];
+
+  $scope.listarEquipamentos = function () {
+    SchedulingService.listarEquipamentos().success(function (equips) {
+      $scope.equips = equips;
+    }).error(function (erros) {
+      //Configurar mensagem de erro ao usuário
+      alert("deu erro nessa budega");
+    });
+  }
+
+  $scope.listarEquipamentos();
+
+  //{scheduleId: 1, title: 'User 1',start: new Date(2014, 10, 10 + 1, 19, 0),end: new Date(2014, 10, 10 + 1, 22, 30), idEquipament: 1, allDay: false},
 
   /* alert on eventClick */
-  $scope.alertOnEventClick = function( event, allDay, jsEvent, view ){
-    $scope.alertMessage = (event.title + ' was clicked ');
+  $scope.alertOnEventClick = function(event, allDay, jsEvent, view ){
+    $scope.schedule.scheduleId = event.scheduleId;
+    $scope.schedule.startDate = event.start.format("YYYY-MM-DD");
+    $scope.schedule.startTime = event.start.format("HH:mm");
+    $scope.schedule.endTime = event.end.format("HH:mm");
+    angular.element('#modalAgendamento').modal('show');
   };
 
+  $scope.newSchedule = function() {
+    $scope.resetFormSchedule();
+    angular.element('#modalAgendamento').modal('show');
+  }
+
   $scope.openDialogDay = function (date, allDay, jsEvent, view) {
-    
+    $scope.resetFormSchedule();
+    $scope.schedule.startDate = date.format("YYYY-MM-DD");
+    angular.element('#modalAgendamento').modal('show');
   }
  
-  /* add custom event*/
   $scope.addEvent = function() {
 
-
-    var startDate = moment($scope.schedule.startDate, "YYYY-MM-DD");
-    startDate = startDate.toDate();
-    var endDate = moment($scope.schedule.endDate, "YYYY-MM-DD");
-    endDate = endDate.toDate();
+    /*Obtendo os dados*/
+    var startDate = moment($scope.schedule.startDate, "YYYY-MM-DD").toDate();
     var startTime = $scope.schedule.startTime.split(":");
     var endTime = $scope.schedule.endTime.split(":");
 
     var startDateEvent = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), startTime[0], startTime[1]);
-    var endDateEvent = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), endTime[0], endTime[1]);
+    var endDateEvent = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), endTime[0], endTime[1]);
 
-    $scope.events.push({
-      title: $scope.schedule.nomeUsuario,
+    var agendamento = {
+      scheduleId: null, //modificar
+      title: $scope.schedule.userName,
       start: startDateEvent,
       end: endDateEvent,
       allDay: false,
-      idEquipament: $scope.idEquipament,
-    });
+      equipamentId: $scope.equipamentId,
+      userId: $scope.userId,
+    };
+
+    $scope.shedulings.push(agendamento);
+
+    /*SchedulingService.adicionar(agendamento).success(function(idAgendamento){
+      agendamento.idAgendamento = idAgendamento;
+      $scope.shedulings.push(agendamento);
+    }).error(function (xhr, err) {
+      //Configurar mensagem de erro ao usuário
+      alert(err);
+    });*/
+
+    $scope.resetFormSchedule();
+
+    angular.element('#modalAgendamento').modal('hide');
   };
 
   /* remove event */
   $scope.remove = function(index) {
-    $scope.events.splice(index,1);
+    $scope.shedulings.splice(index,1);
   };
 
+  /*Limpar os campos*/
+  $scope.resetFormSchedule = function () {
+    $scope.schedule.scheduleId = null;
+    $scope.schedule.startDate = "";
+    $scope.schedule.startTime = "";
+    $scope.schedule.endTime = "";
+  }
 
   $scope.uiConfig = {
     calendar:{
@@ -80,6 +114,6 @@ labIct.controller("SchedulingCtrl", ["$scope", function($scope){
   $scope.uiConfig.calendar.monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
   /* event sources array*/
-  $scope.eventSources = [$scope.events];
+  $scope.eventSources = [$scope.shedulings];
 }]);
 /* EOF */
