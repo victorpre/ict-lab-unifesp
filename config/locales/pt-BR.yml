@@ -275,6 +275,8 @@ pt-BR:
     messages:
       taken: "já está cadastrado"
       blank: "não pode ser vazio"
+      too_short: "muito curta"
+      confirmation: "é diferente de senha"
       already_confirmed: "já foi confirmado"
       confirmation_period_expired: "precisa ser confirmada em até %{period}, por favor, solicite uma nova"
       expired: "expirou, por favor, solicite uma nova"
