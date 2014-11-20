@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
     if self.admin? && user.locked?
       user.locked = false
       user.save
+    else
+      user.locked = true
+      user.save
     end
   end
 

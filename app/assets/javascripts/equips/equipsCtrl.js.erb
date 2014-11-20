@@ -5,6 +5,7 @@ labIct.controller("EquipsCtrl", ["$scope", "$filter", "EquipsService", function(
     $scope.equipaments = [];
     $scope.paginaAtual = 0;
     $scope.equip_json = equip_json;
+    $scope.temErros = false;
 
     $scope.numeroPaginas =function(){
       return Math.ceil($scope.equipaments.length/$scope.numeroRegistros);                
@@ -14,7 +15,10 @@ labIct.controller("EquipsCtrl", ["$scope", "$filter", "EquipsService", function(
       if ($scope.form_equipament.$valid) {
         EquipsService.cadastrar($scope.equipament).success(function(data){
           if(data.errors){
-            console.log(data.errors);
+            $scope.temErros = true;
+            var divErros = angular.element("#divErros");
+            var newLi = angular.element("<li>"+data.errors+"</li>");
+            divErros.append(newLi);
           }else{
             window.location = "/equips";
           }
@@ -22,6 +26,7 @@ labIct.controller("EquipsCtrl", ["$scope", "$filter", "EquipsService", function(
             alert(response.responseText);
         });
       }
+      $scope.temErros = false;
     }
 
     $scope.deletar = function (id) {
@@ -41,13 +46,21 @@ labIct.controller("EquipsCtrl", ["$scope", "$filter", "EquipsService", function(
 
     $scope.editar = function () {
       if ($scope.form_equipament.$valid) {
-        EquipsService.editar($scope.equipament).success(function(){
-          window.location = "/equips";
+        EquipsService.editar($scope.equipament).success(function(data){
+          if(data.errors){
+            $scope.temErros = true;
+            var divErros = angular.element("#divErros");
+            var newLi = angular.element("<li>"+data.errors+"</li>");
+            divErros.append(newLi);
+          }else{
+            window.location = "/equips";
+          }
         }).error(function (erros) {
           //Configurar mensagem de erro ao usuário
           alert("deu erro nessa budega");
         });
       }
+      $scope.temErros = false;
     }
 
     $scope.listar = function () {

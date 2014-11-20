@@ -14,24 +14,7 @@
     equip_json = <%= @equip.to_json.html_safe %>
 </script>
 
-
-<div class="alert alert-error bg-danger" ng-show="form_equipament.name.$dirty && form_equipament.name.$invalid">
-  <div ng-show="form_equipament.name.$error.required"> Preencha o campo nome</div>
-</div>
-
-<div class="alert alert-error bg-danger" ng-show="form_equipament.model.$dirty && form_equipament.model.$invalid">
-  <div ng-show="form_equipament.model.$error.required"> Preencha o campo modelo</div>
-</div>
-
-<div class="alert alert-error bg-danger" ng-show="form_equipament.patrimony.$dirty && form_equipament.patrimony.$invalid">
-  <div ng-show="form_equipament.patrimony.$error.required"> Preencha o campo patrimônio</div>
-</div>
-
-<div class="alert alert-error bg-danger" ng-show="form_equipament.cost.$dirty && form_equipament.cost.$invalid">
-  <div ng-show="form_equipament.cost.$error.required"> Preencha o campo valor hora</div>
-</div>
-
-
+<div id="divErros" ng-show="temErros" class="alert alert-error alert-block"></div>
 
 <div class="form-group">
   <label class="col-sm-3 control-label">Nome:</label>

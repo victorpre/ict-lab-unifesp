@@ -30,7 +30,7 @@ labIct.controller("UsersCtrl", ["$scope", "UsersService", function($scope, Users
       UsersService.liberarUsuario(id).success(function(){
         $scope.users.filter(function( obj ) {
             if(obj.id == id){
-              obj.locked = falsee;
+              obj.locked = !obj.locked;
             };
         });
       }).error(function (erros) {

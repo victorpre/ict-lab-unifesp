@@ -26,7 +26,6 @@ class EquipsController < ApplicationController
     if @equip.save
       redirect_to :action => 'index'
     else
-      binding.pry
       render :json => { :errors => @equip.errors.full_messages }
     end
   end
@@ -34,8 +33,11 @@ class EquipsController < ApplicationController
   def update
     parsed_params = parse_cost(equip_params)
     @equip.update(parsed_params)
-    @equip.save
-    render status: 200, json: @controller.to_json, notice: 'Usuário criado com sucesso!'
+    if @equip.save
+      render status: 200, json: @controller.to_json
+    else
+      render :json => { :errors => @equip.errors.full_messages }
+    end
   end
 
   def destroy
