@@ -14,38 +14,50 @@
       <%= devise_error_messages! %>
 
       <div class="form-group row">
-        <%= f.label :name, "Nome:", :class=>"col-sm-2" %>
-        <div class="col-sm-10">
-          <%= f.text_field :name, autofocus: true, :class=>"form-control" %>
-        </div>
-      </div>
+            <%= f.label :name, "Nome:", :class=>"col-sm-2" %>
+            <div class="col-sm-10">
+              <%= f.text_field :name, autofocus: true, :class=>"form-control" %>
+            </div>
+          </div>
 
-      <div class="form-group row">
-        <%= f.label :email, "E-mail:", :class=>"col-sm-2" %>
-        <div class="col-sm-10">
-          <%= f.text_field :email, autofocus: true, :class=>"form-control" %>
-        </div>
-      </div>
+          <div class="form-group row">
+            <%= f.label :name, "E-mail:", :class=>"col-sm-2" %>
+            <div class="col-sm-10">
+              <%= f.text_field :email, autofocus: true, :class=>"form-control" %>
+            </div>
+          </div>
 
-      <div class="form-group row">
-        <%= f.label :institution, "Instituição:", :class=>"col-sm-2" %>
-        <div class="col-sm-10">
-          <%= f.text_field :institution, autofocus: true, :class=>"form-control" %>
-        </div>
-      </div>
+           <div class="form-group row">
+            <%=f.label :internal, "Tipo:",:class=>"col-sm-2" %>
+            <div class="col-sm-10">
+              <%= f.select :internal,([["Membro da UNIFESP - SJC",true],["Membro de outra UNIFESP",true],["Membro de outra instituição",false]]), {}, { :class => 'form-control' } %>
+            </div>
+          </div>
 
-      <div class="form-group row">
-        <%= f.label :ra, "RA:", :class=>"col-sm-2" %>
-        <div class="col-sm-10">
-          <%= f.text_field :ra, autofocus: true, :class=>"form-control" %>
-        </div>
-      </div>
+          <div class="form-group row">
+            <%= f.label :institution, "Instituição:", :class=>"col-sm-2" %>
+            <div class="col-sm-10">
+              <%= f.text_field :institution, autofocus: true, :class=>"form-control" %>
+            </div>
+          </div>
 
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
+          <div class="form-group row">
+            <%=f.label :type, "Tipo:",:class=>"col-sm-2" %>
+            <div class="col-sm-3">
+              <%= f.radio_button("type", "2",{ :checked => true })  %> Aluno
+            </div>
+            <div class="col-sm-4">
+              <%= f.radio_button("type", "1")  %> Professor 
+            </div>
+          </div>
 
-      <div><%= f.submit "Update" %></div>
+          <div class="form-group row">
+            <%= f.label :ra, "RA:", :class=>"col-sm-2" %>
+            <div class="col-sm-10">
+              <%= f.text_field :ra, autofocus: true, :class=>"form-control" %>
+            </div>
+          </div>
+      <div><%= f.submit "Atualizar" %></div>
     <% end %>
   </div>
 
