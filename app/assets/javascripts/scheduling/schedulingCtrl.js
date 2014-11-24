@@ -2,10 +2,13 @@ labIct.controller("SchedulingCtrl", ["$scope", "SchedulingService", function($sc
   
   $scope.schedule = {}
   $scope.schedule.userName = userName;
-  $scope.shedulings = [{scheduleId: 1, title: 'User 1',start: new Date(2014, 10, 10 + 1, 19, 30),end: new Date(2014, 10, 10 + 1, 22, 30), idEquipament: 1, allDay: false}];
+  $scope.schedulings = [];
+  $scope.schedulings.push({scheduleId: 1, title: 'User 1',start: new Date(2014, 10, 10 + 1, 19, 0),end: new Date(2014, 10, 10 + 1, 22, 30), idEquipament: 1, allDay: false});
   $scope.userId = userId;
   $scope.equipamentId = null;
   $scope.equips = [];
+
+  $scope.botaoRemoverEvento = false;
 
   $scope.listarEquipamentos = function () {
     SchedulingService.listarEquipamentos().success(function (equips) {
@@ -26,6 +29,7 @@ labIct.controller("SchedulingCtrl", ["$scope", "SchedulingService", function($sc
     $scope.schedule.startDate = event.start.format("YYYY-MM-DD");
     $scope.schedule.startTime = event.start.format("HH:mm");
     $scope.schedule.endTime = event.end.format("HH:mm");
+    $scope.botaoRemoverEvento = true;
     angular.element('#modalAgendamento').modal('show');
   };
 
@@ -50,34 +54,43 @@ labIct.controller("SchedulingCtrl", ["$scope", "SchedulingService", function($sc
     var startDateEvent = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), startTime[0], startTime[1]);
     var endDateEvent = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), endTime[0], endTime[1]);
 
-    var agendamento = {
-      scheduleId: null, //modificar
+    var schedule =  null;
+
+    $scope.schedulings.push({
+      scheduleId: 2, //modificar
       title: $scope.schedule.userName,
       start: startDateEvent,
       end: endDateEvent,
-      allDay: false,
       equipamentId: $scope.equipamentId,
       userId: $scope.userId,
-    };
+      allDay: false,
+    });
 
-    $scope.shedulings.push(agendamento);
-
-    /*SchedulingService.adicionar(agendamento).success(function(idAgendamento){
-      agendamento.idAgendamento = idAgendamento;
-      $scope.shedulings.push(agendamento);
+    /*SchedulingService.adicionar(schedule).success(function(scheduleId){
+      schedule.scheduleId = scheduleId;
+      $scope.schedulings.push(schedule);
     }).error(function (xhr, err) {
       //Configurar mensagem de erro ao usuário
       alert(err);
     });*/
 
     $scope.resetFormSchedule();
-
+    console.log($scope.schedulings);
     angular.element('#modalAgendamento').modal('hide');
   };
 
-  /* remove event */
-  $scope.remove = function(index) {
-    $scope.shedulings.splice(index,1);
+  /* Remover um evento */
+  $scope.removeEvent = function(scheduleId) {
+
+    var teste = $scope.schedulings.filter(function( obj ) {
+      return obj.scheduleId == scheduleId;
+    });
+
+    console.log(teste);
+    console.log("Index: " + $scope.schedulings.indexOf(teste));
+    $scope.schedulings.splice($scope.schedulings.indexOf(teste),1);
+    console.log($scope.schedulings);
+    angular.element('#modalAgendamento').modal('hide');
   };
 
   /*Limpar os campos*/
@@ -86,6 +99,7 @@ labIct.controller("SchedulingCtrl", ["$scope", "SchedulingService", function($sc
     $scope.schedule.startDate = "";
     $scope.schedule.startTime = "";
     $scope.schedule.endTime = "";
+    $scope.botaoRemoverEvento = false;
   }
 
   $scope.uiConfig = {
@@ -114,6 +128,6 @@ labIct.controller("SchedulingCtrl", ["$scope", "SchedulingService", function($sc
   $scope.uiConfig.calendar.monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
   /* event sources array*/
-  $scope.eventSources = [$scope.shedulings];
+  $scope.eventSources = [$scope.schedulings];
 }]);
 /* EOF */

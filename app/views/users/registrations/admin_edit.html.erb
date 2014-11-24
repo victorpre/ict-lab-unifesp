@@ -27,19 +27,36 @@
             </div>
           </div>
 
-           <div class="form-group row">
-            <%=f.label :internal, "Tipo:",:class=>"col-sm-2" %>
-            <div class="col-sm-10">
-              <%= f.select :internal,([["Membro da UNIFESP - SJC",true],["Membro de outra UNIFESP",true],["Membro de outra instituição",false]]), {}, { :class => 'form-control' } %>
-            </div>
-          </div>
+      <div class="form-group row">
+        <%=f.label :internal, "Tipo:",:class=>"col-sm-2" %>
+        <div class="col-sm-8">
+          <%= f.select :internal,([["Membro da UNIFESP - SJC",true],["Membro de outra instituição",false]]), {}, { :class => 'form-control' } %>
+        </div>
+      </div>
 
-          <div class="form-group row">
-            <%= f.label :institution, "Instituição:", :class=>"col-sm-2" %>
-            <div class="col-sm-10">
-              <%= f.text_field :institution, autofocus: true, :class=>"form-control" %>
-            </div>
-          </div>
+      <div class="form-group row">
+        <%= f.label :institution, "Instituição:", :class=>"col-sm-2" %>
+        <div class="col-sm-10">
+          <%= f.text_field :institution, autofocus: true, :class=>"form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%=f.label :type, "Tipo:",:class=>"col-sm-2" %>
+        <div class="col-sm-3">
+          <%= f.radio_button("type", "2",{ :checked => true })  %> Aluno
+        </div>
+        <div class="col-sm-4">
+          <%= f.radio_button("type", "1")  %> Professor 
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :ra, "RA:", :class=>"col-sm-2" %>
+        <div class="col-sm-10">
+          <%= f.text_field :ra, autofocus: true, :class=>"form-control" %>
+        </div>
+      </div>
 
           <div class="form-group row">
             <%=f.label :type, "Tipo:",:class=>"col-sm-2" %>
@@ -51,14 +68,47 @@
             </div>
           </div>
 
-          <div class="form-group row">
-            <%= f.label :ra, "RA:", :class=>"col-sm-2" %>
-            <div class="col-sm-10">
-              <%= f.text_field :ra, autofocus: true, :class=>"form-control" %>
-            </div>
-          </div>
-      <div><%= f.submit "Atualizar" %></div>
+      <div class="centralizar">
+        <%= button_tag(type: 'submit', class: "btn btn-primary btn-lg") do %>
+            <i class="fa fa-save"></i> Salvar
+        <% end %>
+      </div>
     <% end %>
   </div>
-
 </div>    
+
+<script type="text/javascript">
+
+    if($('#user_internal').val("true")){
+      $("#user_institution").val("UNIFESP-SJC");
+      $("#user_institution").attr("disabled", true);
+    }
+    
+    //$("#user_institution").attr("style", "display:none");
+
+    $('#user_internal').on('change', function() {
+      if(this.value == "true"){
+        $("#user_institution").val("UNIFESP-SJC");
+        $("#user_institution").attr("disabled", true);
+      }else{
+        $("#user_institution").val("");
+        $("#user_institution").attr("disabled", false);
+      }
+    });
+
+    //Professor
+    $('#user_type_1').on('change', function() {
+      if(this.value == "1"){
+        $("#user_ra").val("");
+        $("#user_ra").attr("disabled", true);
+      }
+    });
+
+    //Aluno
+    $('#user_type_2').on('change', function() {
+      if(this.value == "2"){
+        $("#user_ra").val("");
+        $("#user_ra").attr("disabled", false);
+      }
+    });
+  </script>

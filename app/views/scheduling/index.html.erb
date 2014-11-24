@@ -28,7 +28,7 @@
   	  </div>
   	</div>
 
-	<div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> 
+	<div id="calendar" ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> 
   </div>
 
   <div id="modalAgendamento" tabindex="-1" class="modal fade">
@@ -66,9 +66,15 @@
 		      	</form>
 	      	</div>
 	        <div class="modal-footer">
-	            <div style="text-align:right;">
-	                <button type="button" class="btn btn-primary" ng-click="addEvent()" ng-disabled="form_schedule.$invalid"><i class="fa fa-save"></i> Salvar</button>
-	            </div>
+	        	<div class="row">
+	        		<div  style="text-align:left;" class="col-sm-6">
+		                <button type="button" class="btn btn-primary" ng-click="removeEvent(schedule.scheduleId)" ng-show="botaoRemoverEvento"><i style="color:white" class="fa fa-trash-o"></i> Excluir</button>
+		            </div>
+		            <div  style="text-align:right;" class="col-sm-6">
+		                <button type="button" class="btn btn-primary" ng-click="addEvent()" ng-disabled="form_schedule.$invalid"><i class="fa fa-save"></i> Salvar</button>
+		            </div>
+	        	</div>
+		            
 	        </div>
 	    </div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
