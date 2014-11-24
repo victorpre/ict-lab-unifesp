@@ -12,14 +12,14 @@
 </div>
 
 <div class="row" ng-controller="EquipsCtrl">
+
+  <div class="centralizar row">
+    <%= link_to new_equip_registration_path, :class=>"btn btn-primary"  do %>
+      <i class="fa fa-plus"></i> Adicionar
+    <% end %>
+  </div>
+
   <div class="col-sm-12">
-
-      <div style="text-align:center" class="container row">
-        <%= link_to new_equip_registration_path, :class=>"btn btn-primary"  do %>
-          <i class="fa fa-plus"></i> Adicionar
-        <% end %>
-      </div>
-
       <div class="container row">
         <label>Mostrar:</label>
         <select ng-model="numeroRegistros">
