@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  resources :schedules
   resources :equips
-  resources :scheduling
   devise_for :users, :skip => [:sessions, :registrations], :controllers => { :registrations => "users/registrations", :sessions => "users/sessions" }
   resources :users, only: [:index, :unlock, :delete, :cancel]
   as :user do
@@ -41,6 +41,11 @@ Rails.application.routes.draw do
   post 'new_equip' => 'equips#create', :as => :equip_registration
   get 'edit_equip' => 'equips/registrations#edit', :as => :edit_equip_registration
   put 'edit_equip' => 'equips/registrations#update'
+
+  # Schedules routes
+  get 'new_schedule' => 'schedules#new', :as => :new_schedule_registration
+  post 'schedules' => 'schedules#create', :as => :schedule_registration
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

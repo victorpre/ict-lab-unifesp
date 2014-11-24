@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true
 
+  has_many :schedules
+
   def unlock(user)
     if self.admin? && user.locked?
       user.locked = false
