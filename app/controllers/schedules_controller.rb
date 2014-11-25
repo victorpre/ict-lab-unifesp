@@ -25,7 +25,6 @@ class SchedulesController < ApplicationController
 
     # Tempo do agendamento em minutos
     schedule_length = (schedule_params["end_date"].to_time - schedule_params["start_date"].to_time)/60
-
     # Verifica se horario esta disponivel
     if (!equip.scheduled?(schedule_params["start_date"].to_date,schedule_params["start_date"].to_time..schedule_params["end_date"].to_time))
       # Verifica se duração é menor que 2 hrs, se o usuário não tem mais de 2 horas agendadas no dia e se o agendamento atual mais os outros agendamento não ultrapassam 2 hrs

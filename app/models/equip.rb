@@ -8,6 +8,7 @@ class Equip < ActiveRecord::Base
 
   def scheduled?(day,date_range)
     schedules_today = Schedule.where("equip_id = ? AND start_date BETWEEN ? AND ?", self.id, day.beginning_of_day, day.end_of_day)
+    return false if schedules_today.count == 0
     schedules_today.each do |schedule|
       if date_range.cover?(schedule.start_date)
         return true
