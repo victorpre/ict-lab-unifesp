@@ -54,7 +54,7 @@ labIct.controller("UsersCtrl", ["$scope", "UsersService", function($scope, Users
       UsersService.listar().success(function (users) {
         for(var i=0;i<users.length;i++)
         {
-          users[i].role = (users[i].role == 1)? "Admin" : (users[i].role == 2)? "Operador" : "Usuário";
+          users[i].role = (users[i].role == 1)? "Admin" : (users[i].role == 2)? "Operador" : (users[i].role == 3)? "Usuário" :"";
           users[i].type = (users[i].type == "1")? "Professor" : (users[i].type == "2")? "Aluno" : "";
         }
         $scope.users = users;

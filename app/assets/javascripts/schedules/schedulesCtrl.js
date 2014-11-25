@@ -6,6 +6,7 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
   $scope.userId = userId;
   $scope.equipamentId = null;
   $scope.equips = [];
+  $scope.temErros = false;
 
   $scope.botaoRemoverEvento = false;
 
@@ -37,7 +38,7 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
 
         var agedamento = {
           scheduleId: data[i].id, //modificar
-          title: data[i].userName,
+          title: "User1 Oliveira",
           start: startDateEvent,
           end: endDateEvent,
           equipamentId: data[i].equip_id,
@@ -67,11 +68,15 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
   };
 
   $scope.newSchedule = function() {
+    $('#divErros li').remove();
+    $scope.temErros = false;
     $scope.resetFormSchedule();
     angular.element('#modalAgendamento').modal('show');
   }
 
   $scope.openDialogDay = function (date, allDay, jsEvent, view) {
+    $('#divErros li').remove();
+    $scope.temErros = false;
     $scope.resetFormSchedule();
     $scope.schedule.startDate = date.format("YYYY-MM-DD");
     angular.element('#modalAgendamento').modal('show');
@@ -88,6 +93,7 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
     var startDateEvent = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), startTime[0], startTime[1]);
     var endDateEvent = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), endTime[0], endTime[1]);
 
+    console.log("Nome: " + $scope.schedule.userName);
 
     $scope.schedule = {
       scheduleId: null, //modificar
@@ -98,18 +104,27 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
       userId: $scope.userId,
       allDay: false,
     };
-
+    $('#divErros li').remove();
     SchedulesService.adicionar($scope.schedule).success(function(data){
-      $scope.schedule.scheduleId = data;
-      $scope.schedules.push($scope.schedule);
+      if(data.errors)
+      {
+        $scope.temErros = true;
+        var divErros = angular.element("#divErros");
+        var newLi = angular.element("<li class='erroSchedule'>"+data.errors+"</li>");
+        divErros.append(newLi);
+      }else{
+        $scope.schedule.scheduleId = data;
+        $scope.schedules.push($scope.schedule);
+        $scope.resetFormSchedule();
+        console.log($scope.schedules);
+        angular.element('#modalAgendamento').modal('hide');
+      }
     }).error(function (xhr, err) {
       //Configurar mensagem de erro ao usuário
       console.log(err);
     });
 
-    $scope.resetFormSchedule();
-    console.log($scope.schedules);
-    angular.element('#modalAgendamento').modal('hide');
+    
   };
 
   /* Remover um evento */

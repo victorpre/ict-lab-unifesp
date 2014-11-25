@@ -40,6 +40,8 @@
 	            <h4 class="modal-title center">Novo agendamento</h4>
 	        </div>
 	         <div class="modal-body">
+	         	<div id="divErros" ng-show="temErros" class="alert alert-error alert-block"></div>
+	         	
 	         	<form id="form_schedule" name="form_schedule" novalidate ng-submit="cadastrar()">
 			        <div class="row form-group">
 				      <div class="col-sm-1 col-sm-offset-3">
