@@ -38,4 +38,17 @@ class User < ActiveRecord::Base
       super # Use whatever other message 
     end 
   end
+
+  def two_hours_in_day?(day)
+    schedules_today = Schedule.where("user_id = ? AND start_date BETWEEN ? AND ?", self.id, day.beginning_of_day, day.end_of_day)
+    hours_today = 0
+    schedules_today.each do |schedule|
+      hours_today = hours_today + (schedule.end_date - schedule.start_date)
+    end
+    if (hours_today.to_i/3600) >= 2
+      return true
+    else
+      return false
+    end
+  end  
 end

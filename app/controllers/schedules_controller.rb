@@ -20,11 +20,16 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @schedule = Schedule.new(schedule_params)
-    if @schedule.save
-      render json: @schedule.id
+    user = User.find(schedule_params["user_id"])
+    if (schedule_params["end_date"].to_time - schedule_params["start_date"].to_time) < 2 && !user.two_hours_in_day?(schedule_params["start_date"])
+      @schedule = Schedule.new(schedule_params)
+      if @schedule.save
+        render json: @schedule.id
+      else
+        render :json => { :errors => @schedule.errors.full_messages }
+      end
     else
-      render :json => { :errors => @schedule.errors.full_messages }
+      # Não pode agendar mais que duas horas em um dia
     end
   end
 
