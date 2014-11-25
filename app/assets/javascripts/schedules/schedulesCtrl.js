@@ -3,7 +3,6 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
   $scope.schedule = {}
   $scope.schedule.userName = userName;
   $scope.schedules = [];
-  $scope.schedules.push({scheduleId: 1, title: 'User 1',start: new Date(2014, 10, 10 + 1, 19, 0),end: new Date(2014, 10, 10 + 1, 22, 30), idEquipament: 1, allDay: false});
   $scope.userId = userId;
   $scope.equipamentId = null;
   $scope.equips = [];
@@ -15,11 +14,44 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
       $scope.equips = equips;
     }).error(function (erros) {
       //Configurar mensagem de erro ao usuário
-      alert("deu erro nessa budega");
+      console.log("Erro");
     });
   }
 
   $scope.listarEquipamentos();
+
+  $scope.listSchedulesByEquipament = function() {
+    SchedulesService.listarPorEquipamento($scope.equipamentId).success(function(data){
+      console.log(data);
+      if(data.length == 0)
+      {
+        $scope.schedules = [];
+        $("#calendar").fullCalendar('removeEvents');
+      }
+      for(var i=0;i<data.length;i++)
+      {
+        var startDate = moment(data[i].start_date).toDate();
+        var endTime = moment(data[i].end_date).toDate();
+        var startDateEvent = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), startDate.getHours(), startDate.getMinutes());
+        var endDateEvent = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), endTime.getHours(), endTime.getMinutes());
+
+        var agedamento = {
+          scheduleId: data[i].id, //modificar
+          title: data[i].userName,
+          start: startDateEvent,
+          end: endDateEvent,
+          equipamentId: data[i].equip_id,
+          userId: data[i].user_id,
+          allDay: false,
+        };
+
+        $('#calendar').fullCalendar('renderEvent', agedamento);
+      }
+    }).error(function (xhr, err) {
+      //Configurar mensagem de erro ao usuário
+      console.log(err);
+    });
+  }
 
   //{scheduleId: 1, title: 'User 1',start: new Date(2014, 10, 10 + 1, 19, 0),end: new Date(2014, 10, 10 + 1, 22, 30), idEquipament: 1, allDay: false},
 
@@ -67,12 +99,11 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
     };
 
     SchedulesService.adicionar($scope.schedule).success(function(data){
-      console.log(data);
       $scope.schedule.scheduleId = data;
       $scope.schedules.push($scope.schedule);
     }).error(function (xhr, err) {
       //Configurar mensagem de erro ao usuário
-      alert(err);
+      console.log(err);
     });
 
     $scope.resetFormSchedule();

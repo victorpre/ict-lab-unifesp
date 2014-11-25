@@ -1,8 +1,9 @@
 labIct.factory('SchedulesService', ["$http", function ($http) {
   
   function listarPorEquipamento(equipamentId) {
+    console.log(equipamentId);
     return $http({
-      url: '/schedules/'+equipamentId+'',
+      url: '/schedules/equip/'+equipamentId+'',
       method: 'GET',
       async: false,
       data: {

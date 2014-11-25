@@ -1,6 +1,5 @@
 class SchedulesController < ApplicationController
   before_action :set_schedule, only: [:show, :edit, :update, :destroy]
-
   respond_to :html, :xml, :json
 
   def index
@@ -40,8 +39,8 @@ class SchedulesController < ApplicationController
   end
 
   def list
-    @schedules = Schedule.where(equip_id: schedule_params[:equip_id])
-    respond_with(@schedules)
+    @schedules = Schedule.where(equip_id: params[:equip_id])
+    render :json => @schedules
   end
 
   private
