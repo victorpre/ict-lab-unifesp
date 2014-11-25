@@ -39,6 +39,11 @@ class SchedulesController < ApplicationController
     respond_with(@schedule)
   end
 
+  def list
+    @schedules = Schedule.where(equip_id: schedule_params[:equip_id])
+    respond_with(@schedules)
+  end
+
   private
     def set_schedule
       @schedule = Schedule.find(params[:id])
