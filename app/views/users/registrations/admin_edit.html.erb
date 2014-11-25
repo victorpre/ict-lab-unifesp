@@ -44,7 +44,7 @@
       <div class="form-group row">
         <%=f.label :type, "Tipo:",:class=>"col-sm-2" %>
         <div class="col-sm-3">
-          <%= f.radio_button("type", "2",{ :checked => true })  %> Aluno
+          <%= f.radio_button("type", "2")  %> Aluno
         </div>
         <div class="col-sm-4">
           <%= f.radio_button("type", "1")  %> Professor 
@@ -54,7 +54,7 @@
       <div class="form-group row">
         <%=f.label :role, "Função:",:class=>"col-sm-2" %>
         <div class="col-sm-3">
-          <%= f.radio_button("role", "1",{ :checked => true })  %> Admin
+          <%= f.radio_button("role", "1")  %> Admin
         </div>
         <div class="col-sm-3">
           <%= f.radio_button("role", "2")  %> Operador 
