@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true
+  validates :role, presence: true
+  validates :internal, presence: true
+  validates :type, presence: true
+  validates :institution, presence: true
 
   has_many :schedules
 
@@ -39,13 +43,18 @@ class User < ActiveRecord::Base
     end 
   end
 
-  def two_hours_in_day?(day)
+  def minutes_in_day(day)
     schedules_today = Schedule.where("user_id = ? AND start_date BETWEEN ? AND ?", self.id, day.beginning_of_day, day.end_of_day)
-    hours_today = 0
+    minutes_today = 0
     schedules_today.each do |schedule|
-      hours_today = hours_today + (schedule.end_date - schedule.start_date)
+      minutes_today = minutes_today + (schedule.end_date - schedule.start_date)
     end
-    if (hours_today.to_i/3600) >= 2
+    minutes_today
+  end
+
+  def two_hours_in_day?(day)
+    minutes_today = minutes_in_day(day)
+    if (minutes_today) >= 120
       return true
     else
       return false
