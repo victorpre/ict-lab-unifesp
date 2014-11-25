@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20141124175959) do
     t.datetime "updated_at"
     t.string   "name"
     t.integer  "ra"
-    t.integer  "role",                   default: 3
+    t.integer  "role"
     t.integer  "type"
     t.boolean  "internal"
     t.string   "institution"

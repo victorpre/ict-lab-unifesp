@@ -18,7 +18,7 @@ labIct.factory('SchedulesService', ["$http", function ($http) {
       async: false,
       data: {
       	"start_date" : schedule.start,
-      	"end_date" : schedule.endDate,
+      	"end_date" : schedule.end,
         "user_id": schedule.userId,
       	"equip_id": schedule.equipamentId,
       }

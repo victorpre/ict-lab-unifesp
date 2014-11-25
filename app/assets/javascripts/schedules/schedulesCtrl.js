@@ -56,20 +56,20 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
     var endDateEvent = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), endTime[0], endTime[1]);
 
 
+    $scope.schedule = {
+      scheduleId: null, //modificar
+      title: $scope.schedule.userName,
+      start: startDateEvent,
+      end: endDateEvent,
+      equipamentId: $scope.equipamentId,
+      userId: $scope.userId,
+      allDay: false,
+    };
 
-    // $scope.schedules.push({
-    //   scheduleId: 2, //modificar
-    //   title: $scope.schedule.userName,
-    //   start: startDateEvent,
-    //   end: endDateEvent,
-    //   equipamentId: $scope.equipamentId,
-    //   userId: $scope.userId,
-    //   allDay: false,
-    // });
-
-    SchedulesService.adicionar($scope.schedules).success(function(data){
-      // schedule.scheduleId = scheduleId;
-      $scope.schedules.push(schedule);
+    SchedulesService.adicionar($scope.schedule).success(function(data){
+      console.log(data);
+      $scope.schedule.scheduleId = data;
+      $scope.schedules.push($scope.schedule);
     }).error(function (xhr, err) {
       //Configurar mensagem de erro ao usuário
       alert(err);

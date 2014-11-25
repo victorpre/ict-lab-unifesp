@@ -22,9 +22,8 @@ class SchedulesController < ApplicationController
 
   def create
     @schedule = Schedule.new(schedule_params)
-    binding.pry
     if @schedule.save
-      redirect_to :action => 'index'
+      render json: @schedule.id
     else
       render :json => { :errors => @schedule.errors.full_messages }
     end
