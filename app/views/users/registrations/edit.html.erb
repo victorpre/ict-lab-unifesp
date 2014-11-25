@@ -49,28 +49,41 @@
         </div>
       </div>
 
-          <div class="form-group row">
-            <%= f.label :ra, "RA:", :class=>"col-sm-2" %>
-            <div class="col-sm-10">
-              <%= f.text_field :ra, autofocus: true, :class=>"form-control" %>
-            </div>
-          </div>
+      <div class="form-group row">
+        <%=f.label :role, "Função:",:class=>"col-sm-2" %>
+        <div class="col-sm-3">
+          <%= f.radio_button("role", 1)  %> Admin
+        </div>
+        <div class="col-sm-3">
+          <%= f.radio_button("role", 2)  %> Operador 
+        </div>
+        <div class="col-sm-3">
+          <%= f.radio_button("role", 3)  %> Usuário 
+        </div>
+      </div>
 
-          <div class="form-group row">
-            <%= f.label :password, "Senha:", :class=>"col-sm-2" %>
-            <div class="col-sm-10">
-              <%= f.password_field :password, autocomplete: "off", :class=>"form-control" %>
-            </div>
-          </div>
+      <div class="form-group row">
+        <%= f.label :ra, "RA:", :class=>"col-sm-2" %>
+        <div class="col-sm-10">
+          <%= f.text_field :ra, autofocus: true, :class=>"form-control" %>
+        </div>
+      </div>
 
-          <div class="form-group row">
-            <%= f.label :password_confirmation, "Confirma senha:", :class=>"col-sm-2" %>
-            <div class="col-sm-10">
-              <%= f.password_field :password_confirmation, autocomplete: "off", :class=>"form-control" %>
-            </div>
-          </div>
+      <div class="form-group row">
+        <%= f.label :password, "Senha:", :class=>"col-sm-2" %>
+        <div class="col-sm-10">
+          <%= f.password_field :password, autocomplete: "off", :class=>"form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :password_confirmation, "Confirma senha:", :class=>"col-sm-2" %>
+        <div class="col-sm-10">
+          <%= f.password_field :password_confirmation, autocomplete: "off", :class=>"form-control" %>
+        </div>
+      </div>
     
-  <div class="centralizar">
+      <div class="centralizar">
         <%= button_tag(type: 'submit', class: "btn btn-primary btn-lg") do %>
             <i class="fa fa-save"></i> Salvar
         <% end %>

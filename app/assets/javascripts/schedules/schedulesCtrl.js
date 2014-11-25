@@ -44,8 +44,9 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
           userId: data[i].user_id,
           allDay: false,
         };
+        $scope.schedules.push(agedamento);
 
-        $('#calendar').fullCalendar('renderEvent', agedamento);
+        //$('#calendar').fullCalendar('renderEvent', agedamento);
       }
     }).error(function (xhr, err) {
       //Configurar mensagem de erro ao usuário
@@ -149,7 +150,7 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
         today: "Hoje",
         month: "Mês",
         week: "Semana",
-        day: "Dia"
+        day: "Dia",
       },
       eventClick: $scope.alertOnEventClick,
       dayClick: $scope.openDialogDay,
@@ -158,7 +159,21 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
   $scope.uiConfig.calendar.dayNames = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
   $scope.uiConfig.calendar.dayNamesShort = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
   $scope.uiConfig.calendar.monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+  $scope.uiConfig.calendar.axisFormat = 'H:mm';
+  $scope.uiConfig.calendar.timeFormat = {
+    '': 'H:mm',
+    agenda: 'H:mm'
+  };
+  $scope.uiConfig.calendar.titleFormat = {
+    month:  'MMMM YYYY',
+    week: "D MMMM YYYY ",
+    day: 'dddd, D MMMM YYYY',
+  };
 
+  $scope.uiConfig.calendar.columnFormat = {
+    week: 'dddd, D',
+    day: '',
+  };
   /* event sources array*/
   $scope.eventSources = [$scope.schedules];
 }]);

@@ -52,6 +52,11 @@ labIct.controller("UsersCtrl", ["$scope", "UsersService", function($scope, Users
 
     $scope.listar = function () {
       UsersService.listar().success(function (users) {
+        for(var i=0;i<users.length;i++)
+        {
+          users[i].role = (users[i].role == 1)? "Admin" : (users[i].role == 2)? "Operador" : "Usuário";
+          users[i].type = (users[i].type == "1")? "Professor" : (users[i].type == "2")? "Aluno" : "";
+        }
         $scope.users = users;
       }).error(function (erros) {
         //Configurar mensagem de erro ao usuário
