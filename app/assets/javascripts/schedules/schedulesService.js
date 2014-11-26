@@ -39,11 +39,11 @@ labIct.factory('SchedulesService', ["$http", function ($http) {
   }
 
   function listarEquipamentos() {
-  	return $http({
-	  url: '/equips.json',
-	  method: 'GET',
-	  async: false,
-	});
+    	return $http({
+  	  url: '/equips.json',
+  	  method: 'GET',
+  	  async: false,
+    });
   }
 
   return{

@@ -13,7 +13,7 @@
       </div>
       <div class="modal-footer">
         <div class="col-md-6" style="text-align:left">
-          <%= link_to "Registre-se",  {controller: "registrations", action: "new"}, :class=>"btn btn-primary btn-lg" %>
+          <%= link_to "Novo usuário? Registre-se",  {controller: "registrations", action: "new"} %>
         </div>
         <div class="col-md-6">
           <%= button_tag(type: 'submit', class: "btn btn-primary btn-lg") do %>
@@ -23,5 +23,22 @@
         </div>  
       </div>
     </div>
+  </div>
+</div>
+
+
+<div id="modalConfirmacao" class="modal fade">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Usuário criado com sucesso !</h4>
+          </div>
+          <div class="modal-body">
+              <p>Usuário criado com sucesso. Aguarde o administrador do sistema liberar o seu registro.</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+          </div>
+      </div>
   </div>
 </div>

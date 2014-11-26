@@ -4,7 +4,8 @@ labIct.controller("UsersCtrl", ["$scope", "UsersService", function($scope, Users
     $scope.user = {};
     $scope.users = [];
     $scope.paginaAtual = 0;
-
+    $scope.predicate = 'name'; //Ordenação da tabela
+    
     $scope.numeroPaginas =function(){
       return Math.ceil($scope.users.length/$scope.numeroRegistros);                
     }

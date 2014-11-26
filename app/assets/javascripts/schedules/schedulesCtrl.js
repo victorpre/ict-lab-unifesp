@@ -118,6 +118,7 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
         $scope.resetFormSchedule();
         console.log($scope.schedules);
         angular.element('#modalAgendamento').modal('hide');
+        $scope.$digest();
       }
     }).error(function (xhr, err) {
       //Configurar mensagem de erro ao usuário
