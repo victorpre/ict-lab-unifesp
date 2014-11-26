@@ -84,7 +84,7 @@
 
     if($('#user_internal').val("true")){
       $("#user_institution").val("UNIFESP-SJC");
-      $("#user_institution").attr("disabled", true);
+      $("#user_institution").attr("readonly", true);
     }
     
     //$("#user_institution").attr("style", "display:none");
@@ -92,10 +92,10 @@
     $('#user_internal').on('change', function() {
       if(this.value == "true"){
         $("#user_institution").val("UNIFESP-SJC");
-        $("#user_institution").attr("disabled", true);
+        $("#user_institution").attr("readonly", true);
       }else{
         $("#user_institution").val("");
-        $("#user_institution").attr("disabled", false);
+        $("#user_institution").attr("readonly", false);
       }
     });
 

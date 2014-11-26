@@ -12,14 +12,14 @@
           <div class="form-group row">
             <%= f.label :name, "Nome:", :class=>"col-sm-2" %>
             <div class="col-sm-10">
-              <%= f.text_field :name, autofocus: true, :class=>"form-control" %>
+              <%= f.text_field :name, autofocus: true, :class=>"form-control", :placeholder=>"Nome" %>
             </div>
           </div>
 
           <div class="form-group row">
             <%= f.label :email, "E-mail:", :class=>"col-sm-2" %>
             <div class="col-sm-10">
-              <%= f.text_field :email, autofocus: true, :class=>"form-control" %>
+              <%= f.text_field :email, autofocus: true, :class=>"form-control", :placeholder=>"E-mail" %>
             </div>
           </div>
 
@@ -33,7 +33,7 @@
           <div class="form-group row">
             <%= f.label :institution, "Instituição:", :class=>"col-sm-2" %>
             <div class="col-sm-10">
-              <%= f.text_field :institution,  autofocus: true, :class=>"form-control" %>
+              <%= f.text_field :institution,  autofocus: true, :class=>"form-control", :placeholder=>"Instituição" %>
             </div>
           </div>
 
@@ -50,21 +50,21 @@
           <div class="form-group row">
             <%= f.label :ra, "RA:", :class=>"col-sm-2" %>
             <div class="col-sm-10">
-              <%= f.text_field :ra, autofocus: true, :class=>"form-control" %>
+              <%= f.text_field :ra, autofocus: true, :class=>"form-control", :placeholder=>"RA" %>
             </div>
           </div>
 
           <div class="form-group row">
             <%= f.label :password, "Senha:", :class=>"col-sm-2" %>
             <div class="col-sm-10">
-              <%= f.password_field :password, autocomplete: "off", :class=>"form-control" %>
+              <%= f.password_field :password, autocomplete: "off", :class=>"form-control", :placeholder=>"Senha (mínimo de 8 caracteres)." %>
             </div>
           </div>
 
           <div class="form-group row">
             <%= f.label :password_confirmation, "Confirma senha:", :class=>"col-sm-3" %>
             <div class="col-sm-9">
-              <%= f.password_field :password_confirmation, autocomplete: "off", :class=>"form-control" %>
+              <%= f.password_field :password_confirmation, autocomplete: "off", :class=>"form-control", :placeholder=>"Confirmar senha" %>
             </div>
           </div>
 
@@ -89,16 +89,16 @@
   <script type="text/javascript">
 
     $("#user_institution").val("UNIFESP-SJC");
-    $("#user_institution").attr("disabled", true);
+    $("#user_institution").attr("readonly", true);
     //$("#user_institution").attr("style", "display:none");
 
     $('#user_internal').on('change', function() {
       if(this.value == "true"){
         $("#user_institution").val("UNIFESP-SJC");
-        $("#user_institution").attr("disabled", true);
+        $("#user_institution").attr("readonly", true);
       }else{
         $("#user_institution").val("");
-        $("#user_institution").attr("disabled", false);
+        $("#user_institution").attr("readonly", false);
       }
     });
 

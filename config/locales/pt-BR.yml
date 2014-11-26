@@ -234,7 +234,7 @@ pt-BR:
         inactive: 'Sua conta ainda não foi ativada.'
         invalid: 'E-mail ou senha inválidos.'
         invalid_token: 'O token de autenticação não é válido.'
-        locked: 'Sua conta está bloqueada.'
+        locked: 'Sua conta está bloqueada. Aguarde liberação do administrador do sistema'
         not_found_in_database: 'E-mail ou senha inválidos.'
         timeout: 'Sua sessão expirou, por favor, efetue login novamente para continuar.'
         unauthenticated: 'Para continuar, efetue login ou registre-se.'
@@ -275,7 +275,7 @@ pt-BR:
     messages:
       taken: "já está cadastrado"
       blank: "não pode ser vazio"
-      too_short: "muito curta"
+      too_short: "muito curta. Mínimo de 8 caracteres"
       confirmation: "é diferente de senha"
       already_confirmed: "já foi confirmado"
       confirmation_period_expired: "precisa ser confirmada em até %{period}, por favor, solicite uma nova"

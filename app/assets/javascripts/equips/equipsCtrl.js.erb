@@ -6,6 +6,7 @@ labIct.controller("EquipsCtrl", ["$scope", "$filter", "EquipsService", function(
     $scope.paginaAtual = 0;
     $scope.equip_json = equip_json;
     $scope.temErros = false;
+    $scope.predicate = 'name'; //ordenação da tabela
 
     $scope.numeroPaginas =function(){
       return Math.ceil($scope.equipaments.length/$scope.numeroRegistros);                
