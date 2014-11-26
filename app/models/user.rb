@@ -52,12 +52,30 @@ class User < ActiveRecord::Base
     minutes_today
   end
 
+  def minutes_in_week(day)
+    schedules_in_week = Schedule.where("user_id = ? AND start_date BETWEEN ? AND ?", self.id, day.beginning_of_week, day.end_of_week)
+    minutes_in_week = 0
+    schedules_in_week.each do |schedule|
+      minutes_in_week = minutes_in_week + (schedule.end_date - schedule.start_date)
+    end
+    minutes_in_week
+  end
+
   def two_hours_in_day?(day)
     minutes_today = minutes_in_day(day)
-    if (minutes_today) >= 120
+    if (minutes_today) > 120
       return true
     else
       return false
     end
-  end  
+  end
+
+  def four_hours_in_week?(day)
+    minutes_in_week = minutes_in_week(day)
+    if (minutes_in_week) > 240
+      return true
+    else
+      return false
+    end
+  end
 end
