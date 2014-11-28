@@ -14,4 +14,11 @@
               :institution => "Unifesp",
               :locked => false
               )
+ 1.upto(10) do |i|
+  Equip.create(:name => "Equipamento #{i}",
+              :model => "Modelo #{i}",
+              :patrimony_id => "123.123.#{i}",
+              :institution => "Unifesp",
+              :cost => 50+i
+              )
 end
