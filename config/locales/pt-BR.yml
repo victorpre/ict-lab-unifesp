@@ -222,7 +222,12 @@ pt-BR:
         model: "Modelo"
         name: "Nome"
         cost: "Valor Hora"
-
+    errors:
+        models:
+          user:
+            attributes:
+              email:
+                invalid: "inválido"
   devise:
     confirmations:
       confirmed: 'Sua conta foi confirmada com sucesso. Você está logado.'
