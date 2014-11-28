@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  def after_inactive_sign_up_path_for(resource)
+    "/login"
+  end
+
   before_action do  
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
