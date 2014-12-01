@@ -1,7 +1,7 @@
 labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scope, SchedulesService){
   
   $scope.schedule = {}
-  $scope.schedule.userName = userName;
+  $scope.userName = userName;
   $scope.schedules = [];
   $scope.userId = userId;
   $scope.equipamentId = null;
@@ -93,11 +93,11 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
     var startDateEvent = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), startTime[0], startTime[1]);
     var endDateEvent = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), endTime[0], endTime[1]);
 
-    console.log("Nome: " + $scope.schedule.userName);
+    console.log("Nome: " + $scope.userName);
 
     $scope.schedule = {
       scheduleId: null, //modificar
-      title: $scope.schedule.userName,
+      title: $scope.userName,
       start: startDateEvent,
       end: endDateEvent,
       equipamentId: $scope.equipamentId,
@@ -118,7 +118,6 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
         $scope.resetFormSchedule();
         console.log($scope.schedules);
         angular.element('#modalAgendamento').modal('hide');
-        $scope.$digest();
       }
     }).error(function (xhr, err) {
       //Configurar mensagem de erro ao usuário

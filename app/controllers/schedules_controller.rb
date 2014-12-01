@@ -21,9 +21,11 @@ class SchedulesController < ApplicationController
 
   def create
     user = User.find(schedule_params["user_id"])
-    if !schedule_params["equip_id"]
+    if schedule_params["equip_id"] == nil
       render :json => { :errors => "Equipamento não selecionado!" }
+      return
     end
+
     equip = Equip.find(schedule_params["equip_id"])
     selected_day = schedule_params["start_date"].to_date
 
@@ -32,7 +34,7 @@ class SchedulesController < ApplicationController
     # Verifica se horario esta disponivel
     if (!equip.scheduled?(selected_day,schedule_params["start_date"].to_time..schedule_params["end_date"].to_time))
       # Verifica se duração é menor que 2 hrs, se o usuário não tem mais de 2 horas agendadas no dia, se o agendamento atual mais os outros agendamento não ultrapassam 2 hrs e se usuario nao tem
-      if (schedule_length < 120 && !user.two_hours_in_day?(selected_day) && (schedule_length + user.minutes_in_day(selected_day) < 120) && !user.four_hours_week?(selected_day))
+      if (schedule_length <= 120 && !user.two_hours_in_day?(selected_day) && (schedule_length + user.minutes_in_day(selected_day) <= 120) && !user.four_hours_in_week?(selected_day))
         @schedule = Schedule.new(schedule_params)
         if @schedule.save
           render json: @schedule.id
