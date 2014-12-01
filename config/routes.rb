@@ -45,7 +45,8 @@ Rails.application.routes.draw do
   # Schedules routes
   get 'new_schedule' => 'schedules#new', :as => :new_schedule_registration
   post 'schedules' => 'schedules#create', :as => :schedule_registration
-  get 'schedules/equip/:equip_id' => 'schedules#list', :as => :equips_schedule  
+  get 'schedules/equip/:equip_id' => 'schedules#list', :as => :equips_schedule
+  delete 'schedules/:id' => 'schedules#destroy', :as => :delete_schedule  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

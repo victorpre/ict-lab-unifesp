@@ -56,7 +56,7 @@ class SchedulesController < ApplicationController
 
   def destroy
     @schedule.destroy
-    respond_with(@schedule)
+    render status: 200, json: @controller.to_json
   end
 
   def list
