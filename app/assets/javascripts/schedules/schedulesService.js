@@ -22,6 +22,7 @@ labIct.factory('SchedulesService', ["$http", function ($http) {
       	"end_date" : schedule.end,
         "user_id": schedule.userId,
       	"equip_id": schedule.equipamentId,
+        "user_name": schedule.userName,
       }
     });
   }

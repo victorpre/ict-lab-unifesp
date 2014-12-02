@@ -26,43 +26,6 @@
           </div>
 
       <div class="form-group row">
-        <%=f.label :internal, "Tipo:",:class=>"col-sm-2" %>
-        <div class="col-sm-10">
-          <%= f.select :internal,([["Membro da UNIFESP - SJC",true],["Membro de outra instituição",false]]), {}, { :class => 'form-control' } %>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <%= f.label :institution, "Instituição:", :class=>"col-sm-2" %>
-        <div class="col-sm-10">
-          <%= f.text_field :institution, autofocus: true, :class=>"form-control" %>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <%=f.label :type, "Tipo:",:class=>"col-sm-2" %>
-        <div class="col-sm-3">
-          <%= f.radio_button("type", "2")  %> Aluno
-        </div>
-        <div class="col-sm-4">
-          <%= f.radio_button("type", "1")  %> Professor 
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <%=f.label :role, "Função:",:class=>"col-sm-2" %>
-        <div class="col-sm-3">
-          <%= f.radio_button("role", 1)  %> Admin
-        </div>
-        <div class="col-sm-3">
-          <%= f.radio_button("role", 2)  %> Operador 
-        </div>
-        <div class="col-sm-3">
-          <%= f.radio_button("role", 3)  %> Usuário 
-        </div>
-      </div>
-
-      <div class="form-group row">
         <%= f.label :ra, "RA:", :class=>"col-sm-2" %>
         <div class="col-sm-10">
           <%= f.text_field :ra, autofocus: true, :class=>"form-control" %>

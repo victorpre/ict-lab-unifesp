@@ -11,29 +11,30 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
 
   angular.element('#calendar').fullCalendar(
   {
-	ignoreTimezone:	false,
-	contentHeight: 400,
-	defaultView: 'month',
-		eventMouseover: function(calEvent, jsEvent, view) {
+    ignoreTimezone:	false,
+	  contentHeight: 400,
+	  defaultView: 'month',
+		
+    eventMouseover: function(calEvent, jsEvent, view) {
 		},
 
 		dayClick: function(date, allDay, jsEvent, view) {
 			angular.element('#divErros li').remove();
-		    $scope.temErros = false;
-		    $scope.resetFormSchedule();
-		    $scope.schedule.startDate = moment(date).format("YYYY-MM-DD");
-		    $scope.$digest();
-		    angular.element('#modalAgendamento').modal('show');
+	    $scope.temErros = false;
+	    $scope.resetFormSchedule();
+	    $scope.schedule.startDate = moment(date).format("YYYY-MM-DD");
+	    $scope.$digest();
+	    angular.element('#modalAgendamento').modal('show');
 		},
 		
 		eventClick: function(calEvent, jsEvent, view) {
 			$scope.schedule.scheduleId = calEvent.scheduleId;
-		    $scope.schedule.startDate = moment(calEvent.start).format("YYYY-MM-DD");
-		    $scope.schedule.startTime = moment(calEvent.start).format("HH:mm");
-		    $scope.schedule.endTime = moment(calEvent.end).format("HH:mm");
-		    $scope.botaoRemoverEvento = true;
-		    $scope.$digest();
-		    angular.element('#modalAgendamento').modal('show');
+	    $scope.schedule.startDate = moment(calEvent.start).format("YYYY-MM-DD");
+	    $scope.schedule.startTime = moment(calEvent.start).format("HH:mm");
+	    $scope.schedule.endTime = moment(calEvent.end).format("HH:mm");
+	    $scope.botaoRemoverEvento = true;
+	    $scope.$digest();
+	    angular.element('#modalAgendamento').modal('show');
 		},
   });
 
@@ -62,7 +63,7 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
         var schedule = {
           id: data[i].id,
           scheduleId: data[i].id, 
-          title: $scope.userName, //modificar
+          title: data[i].user_name, //modificar
           start: startDateEvent,
           end: endDateEvent,
           equipamentId: data[i].equip_id,
@@ -103,6 +104,7 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
       end: endDateEvent,
       equipamentId: $scope.equipamentId,
       userId: $scope.userId,
+      user_name: $scope.userName,
       allDay: false,
     };
 
