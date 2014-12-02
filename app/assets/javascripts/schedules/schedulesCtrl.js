@@ -7,7 +7,8 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
   $scope.equipamentId = null;
   $scope.equips = [];
   $scope.temErros = false;
-  $scope.botaoRemoverEvento = false;
+  $scope.EscondeBotaoRemoverEvento = true;
+  $scope.EscondeBotaoAdicionarEvento = false;
 
   angular.element('#calendar').fullCalendar(
   {
@@ -28,11 +29,18 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
 		},
 		
 		eventClick: function(calEvent, jsEvent, view) {
+      $('#divErros li').remove();
+      $scope.temErros = false;
 			$scope.schedule.scheduleId = calEvent.scheduleId;
 	    $scope.schedule.startDate = moment(calEvent.start).format("YYYY-MM-DD");
 	    $scope.schedule.startTime = moment(calEvent.start).format("HH:mm");
 	    $scope.schedule.endTime = moment(calEvent.end).format("HH:mm");
-	    $scope.botaoRemoverEvento = true;
+      $scope.EscondeBotaoAdicionarEvento = true;
+      if(userId == calEvent.userId){
+        $scope.EscondeBotaoRemoverEvento = false;
+      }else{
+        $scope.EscondeBotaoRemoverEvento = true;
+      }
 	    $scope.$digest();
 	    angular.element('#modalAgendamento').modal('show');
 		},
@@ -147,7 +155,8 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
     $scope.schedule.startDate = "";
     $scope.schedule.startTime = "";
     $scope.schedule.endTime = "";
-    $scope.botaoRemoverEvento = false;
+    $scope.EscondeBotaoRemoverEvento = true;
+    $scope.EscondeBotaoAdicionarEvento = false;
   }
 }]);
 /* EOF */
