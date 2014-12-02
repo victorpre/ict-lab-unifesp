@@ -24,7 +24,8 @@ class EquipsController < ApplicationController
     parsed_params = parse_cost(equip_params)
     @equip = Equip.new(parsed_params)
     if @equip.save
-      redirect_to :action => 'index'
+      flash[:notice] = 'Equipamento adicionado com sucesso!'
+      redirect_to :equip_index, flash: {notice: "Equipamento adicionado com sucesso!"}
     else
       render :json => { :errors => @equip.errors.full_messages }
     end

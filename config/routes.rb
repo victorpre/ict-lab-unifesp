@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
 
   # Equips routes
+  get 'equips' => 'equips#index', :as => :equip_index
   get 'new_equip' => 'equips#new', :as => :new_equip_registration
   post 'new_equip' => 'equips#create', :as => :equip_registration
   get 'edit_equip' => 'equips/registrations#edit', :as => :edit_equip_registration

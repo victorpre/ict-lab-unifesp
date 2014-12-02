@@ -12,6 +12,9 @@
 </div>
 
 <div class="row" ng-controller="EquipsCtrl">
+  <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
 
   <div class="centralizar row">
     <%= link_to new_equip_registration_path, :class=>"btn btn-primary"  do %>
