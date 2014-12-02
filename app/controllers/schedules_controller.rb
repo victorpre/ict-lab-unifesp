@@ -3,7 +3,6 @@ class SchedulesController < ApplicationController
   respond_to :html, :xml, :json
 
   def index
-    @schedules = Schedule.all
     respond_with(@schedules)
   end
 
@@ -39,6 +38,7 @@ class SchedulesController < ApplicationController
         if (!user.two_hours_in_day?(selected_day) && (schedule_length + user.minutes_in_day(selected_day) <= 120))
           if (!user.four_hours_in_week?(selected_day) && (schedule_length + user.minutes_in_week(selected_day) <= 240))
             @schedule = Schedule.new(schedule_params)
+            @schedule.user_name = user.name
             if @schedule.save
               render json: @schedule.id
             else
@@ -79,6 +79,6 @@ class SchedulesController < ApplicationController
     end
 
     def schedule_params
-      params.require(:schedule).permit(:start_date, :end_date, :user_id, :equip_id)
+      params.require(:schedule).permit(:start_date, :end_date, :user_id, :equip_id, :user_name)
     end
 end

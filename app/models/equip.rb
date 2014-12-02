@@ -4,7 +4,7 @@ class Equip < ActiveRecord::Base
   validates :patrimony_id, presence: true, :uniqueness => {:case_sensitive => false}
   validates :cost, presence: true
 
-  has_many :schedules
+  has_many :schedules, dependent: :destroy
 
   def scheduled?(day,date_range)
     schedules_today = Schedule.where("equip_id = ? AND start_date BETWEEN ? AND ?", self.id, day.beginning_of_day, day.end_of_day)
