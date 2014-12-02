@@ -1,7 +1,7 @@
 class EquipsController < ApplicationController
   before_action :set_equip, only: [:show, :edit, :update, :destroy]
   respond_to :html, :xml, :json
-  before_filter :verify_is_admin
+  before_filter :verify_is_admin, :except => [:index]
 
   def index
     @equips = Equip.all
