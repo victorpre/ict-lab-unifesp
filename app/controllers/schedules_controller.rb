@@ -33,19 +33,28 @@ class SchedulesController < ApplicationController
     schedule_length = (schedule_params["end_date"].to_time - schedule_params["start_date"].to_time)/60
     # Verifica se horario esta disponivel
     if (!equip.scheduled?(selected_day,schedule_params["start_date"].to_time..schedule_params["end_date"].to_time))
-      # Verifica se duração é menor que 2 hrs, se o usuário não tem mais de 2 horas agendadas no dia, se o agendamento atual mais os outros agendamento não ultrapassam 2 hrs e se usuario nao tem
-      if (schedule_length <= 120 && !user.two_hours_in_day?(selected_day) && (schedule_length + user.minutes_in_day(selected_day) <= 120) && !user.four_hours_in_week?(selected_day))
-        @schedule = Schedule.new(schedule_params)
-        if @schedule.save
-          render json: @schedule.id
+      # Verifica se duração é menor que 2 hrs,
+      if (schedule_length <= 120 )
+         # Verifica se o usuário não tem mais de 2 horas agendadas no dia
+        if (!user.two_hours_in_day?(selected_day) && (schedule_length + user.minutes_in_day(selected_day) <= 120))
+          if (!user.four_hours_in_week?(selected_day) && (schedule_length + user.minutes_in_week(selected_day) <= 240))
+            @schedule = Schedule.new(schedule_params)
+            if @schedule.save
+              render json: @schedule.id
+            else
+              render :json => { :errors => @schedule.errors.full_messages }
+            end
+           else
+            render :json => { :errors => "Usuário não pode agendar mais do que quatro horas em uma semana." }
+           end
         else
-          render :json => { :errors => @schedule.errors.full_messages }
+          render :json => { :errors => "Usuário não pode agendar mais de duas horas em um dia." }
         end
       else
-       render :json => { :errors => "Não pode agendar mais que duas horas em um dia" } # Não pode agendar mais que duas horas em um dia
+       render :json => { :errors => "Impossível realizar um agendamento com duração maior do que duas horas." }
       end
     else
-      render :json => { :errors => "Horario indisponivel" } # Horario indisponivel
+      render :json => { :errors => "Horario indisponivel!" } # Horario indisponivel
     end
   end
 

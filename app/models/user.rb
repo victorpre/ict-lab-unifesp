@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates :type, presence: true
   validates :institution, presence: true
 
-  has_many :schedules
+  has_many :schedules, dependent: :destroy
 
   def unlock(user)
     if self.admin? && user.locked?
@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
     schedules_today.each do |schedule|
       minutes_today = minutes_today + (schedule.end_date - schedule.start_date)
     end
-    minutes_today
+    minutes_today/60
   end
 
   def minutes_in_week(day)
@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
     schedules_in_week.each do |schedule|
       minutes_in_week = minutes_in_week + (schedule.end_date - schedule.start_date)
     end
-    minutes_in_week
+    minutes_in_week/60
   end
 
   def two_hours_in_day?(day)
