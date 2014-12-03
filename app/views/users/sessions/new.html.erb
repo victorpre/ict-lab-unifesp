@@ -6,11 +6,11 @@
       </div>
       <div class="modal-body">
         <%= form_for(resource, :as => resource_name, :class=> "form col-md-12 center-block", :url => session_path(resource_name)) do |f| %>
-
-        <% flash.each do |key, value| %>
-          <div class="alert alert-<%= key %>"><%= value %></div>
+        <% if flash %>
+          <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+          <% end %>
         <% end %>
-
           <%= f.email_field :email, :autofocus => true, :class=>'form-control input-lg', :placeholder=>"E-mail" %>
           <br>
           <%= f.password_field :password, :class=>'form-control input-lg', :placeholder=>"Senha" %>
