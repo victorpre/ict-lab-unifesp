@@ -58,6 +58,7 @@ labIct.controller("SchedulesCtrl", ["$scope", "SchedulesService", function($scop
   $scope.listarEquipamentos();
 
   $scope.listSchedulesByEquipament = function() {
+
     SchedulesService.listarPorEquipamento($scope.equipamentId).success(function(data){
       angular.element("#calendar").fullCalendar('removeEvents');
 
